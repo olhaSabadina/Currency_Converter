@@ -12,7 +12,8 @@ class StartViewController: UIViewController {
     private let backgroundImageView = UIImageView()
     private let appNameLabel = UILabel()
     private let lastUpdatedLabel = UILabel()
-    private let datePicker = UIDatePicker()
+    private let dateAndTimeLabel = UILabel()
+    private let nationalBankExchangeRateButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,22 +22,17 @@ class StartViewController: UIViewController {
         configBackgroundImageView()
         configAppNameLabel()
         configLastUpdatedLabel()
-        configDatePicker()
+        configDateAndTimeLabel()
+        configNationalBankExchangeRateButton()
         setConstraints()
-    }
-
-    @objc func refreshDade(sender: UIDatePicker) {
-        print(self.datePicker.date)
-        
-        
-        
     }
     
     private func setUpView() {
         view.addSubview(backgroundImageView)
         backgroundImageView.addSubview(appNameLabel)
         view.addSubview(lastUpdatedLabel)
-        view.addSubview(datePicker)
+        view.addSubview(dateAndTimeLabel)
+        view.addSubview(nationalBankExchangeRateButton)
     }
     
     private func configBackgroundImageView() {
@@ -61,12 +57,26 @@ class StartViewController: UIViewController {
         lastUpdatedLabel.font = UIFont.systemFont(ofSize: 20)
     }
     
-    private func configDatePicker() {
-        datePicker.translatesAutoresizingMaskIntoConstraints = false
-        datePicker.timeZone = NSTimeZone.local
-        datePicker.backgroundColor = UIColor.white
-        datePicker.datePickerMode = .dateAndTime
-        datePicker.addTarget(self, action: #selector(refreshDade), for: .valueChanged)
+    private func configDateAndTimeLabel() {
+        dateAndTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateAndTimeLabel.textColor = .systemGray
+        dateAndTimeLabel.textAlignment = .left
+        dateAndTimeLabel.text = "dd.mm.yyyy hh:m"
+        dateAndTimeLabel.font = UIFont.systemFont(ofSize: 20)
+        
+    }
+    
+    private func configNationalBankExchangeRateButton() {
+        
+        nationalBankExchangeRateButton.translatesAutoresizingMaskIntoConstraints = false
+        nationalBankExchangeRateButton.setTitle("National Bank Exchange Rate", for: .normal)
+        nationalBankExchangeRateButton.setTitleColor(UIColor.systemBlue, for: .normal)
+        nationalBankExchangeRateButton.layer.borderWidth = 1
+        nationalBankExchangeRateButton.layer.cornerRadius = 15
+        nationalBankExchangeRateButton.layer.borderColor = UIColor.systemBlue.cgColor
+        
+//        nationalBankExchangeRateButton.addTarget(self, action: #selector(), for: .touchUpInside)
+        
         
     }
     
@@ -82,11 +92,16 @@ class StartViewController: UIViewController {
             
             lastUpdatedLabel.heightAnchor.constraint(equalToConstant: 30),
             lastUpdatedLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            lastUpdatedLabel.bottomAnchor.constraint(equalTo: datePicker.topAnchor, constant: -10),
+            lastUpdatedLabel.bottomAnchor.constraint(equalTo: dateAndTimeLabel.topAnchor, constant: -1),
             
-            datePicker.heightAnchor.constraint(equalToConstant: 30),
-            datePicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            datePicker.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)
+            dateAndTimeLabel.heightAnchor.constraint(equalToConstant: 30),
+            dateAndTimeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            dateAndTimeLabel.bottomAnchor.constraint(equalTo: nationalBankExchangeRateButton.topAnchor, constant: -10),
+            
+            nationalBankExchangeRateButton.heightAnchor.constraint(equalToConstant: 40),
+            nationalBankExchangeRateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nationalBankExchangeRateButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            nationalBankExchangeRateButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
 
         ])
     }
