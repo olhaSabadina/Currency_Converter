@@ -16,6 +16,7 @@
 		5886125E29F6700B00B0C35B /* CurrencyConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5886125D29F6700B00B0C35B /* CurrencyConverterTests.swift */; };
 		5886126829F6700B00B0C35B /* CurrencyConverterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5886126729F6700B00B0C35B /* CurrencyConverterUITests.swift */; };
 		5886126A29F6700B00B0C35B /* CurrencyConverterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5886126929F6700B00B0C35B /* CurrencyConverterUITestsLaunchTests.swift */; };
+		5886128329F7F91600B0C35B /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5886128229F7F91600B0C35B /* CurrencyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		5886126329F6700B00B0C35B /* CurrencyConverterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrencyConverterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5886126729F6700B00B0C35B /* CurrencyConverterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterUITests.swift; sourceTree = "<group>"; };
 		5886126929F6700B00B0C35B /* CurrencyConverterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5886128229F7F91600B0C35B /* CurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				5886127629F67A2600B0C35B /* Applications */,
 				5886127729F67A8700B0C35B /* ViewControllers */,
+				5886127F29F7F86300B0C35B /* Views */,
 				5886127929F67EB000B0C35B /* CoreData */,
 				5886127829F67ACB00B0C35B /* Resources */,
 			);
@@ -157,6 +160,14 @@
 				5886124C29F6700700B0C35B /* CurrencyConverter.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		5886127F29F7F86300B0C35B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5886128229F7F91600B0C35B /* CurrencyView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5886124829F6700700B0C35B /* StartViewController.swift in Sources */,
+				5886128329F7F91600B0C35B /* CurrencyView.swift in Sources */,
 				5886124E29F6700700B0C35B /* CurrencyConverter.xcdatamodeld in Sources */,
 				5886124429F6700700B0C35B /* AppDelegate.swift in Sources */,
 				5886124629F6700700B0C35B /* SceneDelegate.swift in Sources */,
