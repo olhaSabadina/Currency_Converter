@@ -7,11 +7,14 @@
 
 import UIKit
 
-class CurrencyView: UIView {
+class CurrencyMainView: UIView {
 
     private let exchangeRateSegmentedControl = UISegmentedControl(items: ["Sell", "Buy"])
-    private let addCurrencyButton = UIButton()
-    private let shareButton = UIButton()
+    let addCurrencyButton = UIButton(type: .system)
+    let shareButton = UIButton(type: .system)
+    let currencyTableView = UITableView()
+    
+    static let idMainTableViewCell = "currencyTableViewCell"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,10 +24,9 @@ class CurrencyView: UIView {
         configExchangeRateSegmentedControl()
         configAddCurrencyButton()
         configShareButton()
+        configCurrencyTableView()
         
         setConstraints()
-        
-
     }
 
     required init?(coder: NSCoder) {
@@ -53,6 +55,7 @@ class CurrencyView: UIView {
         addSubview(exchangeRateSegmentedControl)
         addSubview(addCurrencyButton)
         addSubview(shareButton)
+        addSubview(currencyTableView)
     }
     
 
@@ -61,6 +64,7 @@ class CurrencyView: UIView {
         exchangeRateSegmentedControl.backgroundColor = .white
         exchangeRateSegmentedControl.selectedSegmentTintColor = .systemBlue
         exchangeRateSegmentedControl.layer.cornerRadius = 10
+        exchangeRateSegmentedControl.selectedSegmentIndex = 0
         exchangeRateSegmentedControl.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         exchangeRateSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)], for: .normal)
         exchangeRateSegmentedControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
@@ -72,8 +76,6 @@ class CurrencyView: UIView {
         addCurrencyButton.setImage(UIImage(named: "blue_plus"), for: .normal)
         addCurrencyButton.setTitleColor(UIColor.systemBlue, for: .normal)
         addCurrencyButton.titleLabel?.font = .systemFont(ofSize: 13)
-       
-//        addCurrencyButton.addTarget(self, action: #selector(), for: .touchUpInside)
     }
     
     private func configShareButton() {
@@ -81,6 +83,14 @@ class CurrencyView: UIView {
         shareButton.setBackgroundImage(UIImage(named: "square.and.arrow.up"), for: .normal)
        
 //        shareButton.addTarget(self, action: #selector(), for: .touchUpInside)
+    }
+    
+    private func configCurrencyTableView() {
+        currencyTableView.register(CurrencyMainCell.self, forCellReuseIdentifier: CurrencyMainView.idMainTableViewCell)
+        currencyTableView.translatesAutoresizingMaskIntoConstraints = false
+        currencyTableView.rowHeight = 70
+        currencyTableView.separatorStyle = .none
+        
     }
     
     private func setConstraints() {
@@ -98,9 +108,16 @@ class CurrencyView: UIView {
             shareButton.heightAnchor.constraint(equalToConstant: 25),
             shareButton.widthAnchor.constraint(equalToConstant: 20),
             shareButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            shareButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
+            shareButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            
+            currencyTableView.topAnchor.constraint(equalTo: exchangeRateSegmentedControl.bottomAnchor, constant: 20),
+            currencyTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            currencyTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            currencyTableView.bottomAnchor.constraint(equalTo: addCurrencyButton.topAnchor, constant: -20)
+            
         ])
     }
     
-    
 }
+
+

@@ -14,8 +14,11 @@ class StartViewController: UIViewController {
     private let lastUpdatedLabel = UILabel()
     private let dateAndTimeLabel = UILabel()
     private let nationalBankExchangeRateButton = UIButton()
-    private let currencyView = CurrencyView()
-    
+    private let currencyView = CurrencyMainView()
+    var currensesArray: [Currency] = []
+
+//MARK: - live cycle App:
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -26,10 +29,21 @@ class StartViewController: UIViewController {
         configDateAndTimeLabel()
         configNationalBankExchangeRateButton()
         configCurrencyView()
+        addTargetsForButtons()
         setConstraints()
-        
+        fetchDataFromNet()
     }
     
+//MARK: - objc Function:
+    
+    @objc func openCurrencyListVC() {
+        let currencyListVC = CurrencyListViewController()
+        currencyListVC.currencyArrayFromNet = currensesArray
+        navigationController?.pushViewController(currencyListVC, animated: true)
+    }
+    
+//MARK: - Function:
+
     private func setUpView() {
         view.addSubview(backgroundImageView)
         backgroundImageView.addSubview(appNameLabel)
@@ -37,6 +51,11 @@ class StartViewController: UIViewController {
         view.addSubview(dateAndTimeLabel)
         view.addSubview(nationalBankExchangeRateButton)
         view.addSubview(currencyView)
+    }
+    
+    func addTargetsForButtons() {
+        currencyView.addCurrencyButton.addTarget(self, action: #selector(openCurrencyListVC), for: .touchUpInside)
+        
     }
     
     private func configBackgroundImageView() {
@@ -79,14 +98,70 @@ class StartViewController: UIViewController {
         nationalBankExchangeRateButton.layer.borderColor = UIColor.systemBlue.cgColor
         nationalBankExchangeRateButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
         
-//        nationalBankExchangeRateButton.addTarget(self, action: #selector(), for: .touchUpInside)
+        //        nationalBankExchangeRateButton.addTarget(self, action: #selector(), for: .touchUpInside)
         
     }
     
     private func configCurrencyView() {
         currencyView.translatesAutoresizingMaskIntoConstraints = false
+        currencyView.currencyTableView.delegate = self
+        currencyView.currencyTableView.dataSource = self
     }
     
+    func fetchDataFromNet(){
+        NetworkFetchManager().fetchCurrences(date: Date()) { model in
+            guard let model = model else {return}
+            self.currensesArray = model.currences
+            self.currensesArray.sort {$0.currency < $1.currency}
+            for item  in self.currensesArray {
+                print("\(item.currency): ,")
+                }
+            }
+        }
+}
+
+//MARK: - UITableViewDelegate
+
+extension StartViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        let cell = tableView.cellForRow(at: indexPath) as! CurrencyMainCell
+        cell.selectionStyle = .none
+        cell.currencyTextField.delegate = self
+        guard indexPath.row == 0 else {return}
+        cell.selectionStyle = .blue
+        cell.currencyTextField.becomeFirstResponder()
+    }
+}
+
+//MARK: - UITableViewDataSource
+
+extension StartViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CurrencyMainView.idMainTableViewCell, for: indexPath) as? CurrencyMainCell else {return UITableViewCell()}
+
+        return cell
+    }
+}
+
+//MARK: - UITextFieldDelegate:
+
+extension StartViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
+}
+
+//MARK: - Set constraints:
+
+extension StartViewController {
     private func setConstraints() {
         NSLayoutConstraint.activate([
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -114,13 +189,7 @@ class StartViewController: UIViewController {
             currencyView.bottomAnchor.constraint(equalTo: lastUpdatedLabel.topAnchor, constant: -20)
         ])
     }
-    
-    
-    
-    
-   
-     
-
-
 }
+
+
 
