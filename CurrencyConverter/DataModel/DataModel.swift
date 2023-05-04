@@ -30,7 +30,10 @@ struct Currency: Codable {
     
     var fullCurrensyName: String {
     return currency + " - " + (currencesDictionary[currency] ?? "not data")
-        
+    }
+    
+    var firstLetter: String {
+        return currency[currency.startIndex].uppercased()
     }
 }
 

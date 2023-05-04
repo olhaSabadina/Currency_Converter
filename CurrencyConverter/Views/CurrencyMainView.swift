@@ -25,7 +25,6 @@ class CurrencyMainView: UIView {
         configAddCurrencyButton()
         configShareButton()
         configCurrencyTableView()
-        
         setConstraints()
     }
 
@@ -116,6 +115,13 @@ class CurrencyMainView: UIView {
             currencyTableView.bottomAnchor.constraint(equalTo: addCurrencyButton.topAnchor, constant: -20)
             
         ])
+    }
+    
+    func reloadTable(){
+        DispatchQueue.main.async {
+            self.currencyTableView.reloadData()
+        }
+        
     }
     
 }

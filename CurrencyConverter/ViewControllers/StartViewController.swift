@@ -13,9 +13,15 @@ class StartViewController: UIViewController {
     private let appNameLabel = UILabel()
     private let lastUpdatedLabel = UILabel()
     private let dateAndTimeLabel = UILabel()
-    private let nationalBankExchangeRateButton = UIButton()
+    private let nationalBankExchangeRateButton = UIButton(type: .system)
     private let currencyView = CurrencyMainView()
-    var currensesArray: [Currency] = []
+    private var currensiesArrayFromNet: [Currency] = []
+    
+    private var currensiesArray: [Currency] = [] {
+        didSet {
+            currencyView.reloadTable()
+        }
+    }
 
 //MARK: - live cycle App:
 
@@ -38,8 +44,12 @@ class StartViewController: UIViewController {
     
     @objc func openCurrencyListVC() {
         let currencyListVC = CurrencyListViewController()
-        currencyListVC.currencyArrayFromNet = currensesArray
-        navigationController?.pushViewController(currencyListVC, animated: true)
+        let navContrroler = UINavigationController(rootViewController: currencyListVC)
+        currencyListVC.completionChooseCurrency = {[weak self] currencyChoose in
+            self?.currensiesArray.append(currencyChoose)
+        }
+        currencyListVC.currencyArrayFromNet = currensiesArrayFromNet
+        navigationController?.present(navContrroler, animated: true)
     }
     
 //MARK: - Function:
@@ -111,11 +121,8 @@ class StartViewController: UIViewController {
     func fetchDataFromNet(){
         NetworkFetchManager().fetchCurrences(date: Date()) { model in
             guard let model = model else {return}
-            self.currensesArray = model.currences
-            self.currensesArray.sort {$0.currency < $1.currency}
-            for item  in self.currensesArray {
-                print("\(item.currency): ,")
-                }
+            self.currensiesArrayFromNet = model.currences
+            self.currensiesArrayFromNet.sort {$0.currency < $1.currency}
             }
         }
 }
@@ -125,13 +132,7 @@ class StartViewController: UIViewController {
 extension StartViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        let cell = tableView.cellForRow(at: indexPath) as! CurrencyMainCell
-        cell.selectionStyle = .none
-        cell.currencyTextField.delegate = self
-        guard indexPath.row == 0 else {return}
-        cell.selectionStyle = .blue
-        cell.currencyTextField.becomeFirstResponder()
+        
     }
 }
 
@@ -139,12 +140,13 @@ extension StartViewController: UITableViewDelegate {
 
 extension StartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return currensiesArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CurrencyMainView.idMainTableViewCell, for: indexPath) as? CurrencyMainCell else {return UITableViewCell()}
-
+        cell.currancy = currensiesArray[indexPath.row]
+        cell.configCell()
         return cell
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class CurrencyListCell: UITableViewCell {
     
-    static let cellID = "currencyCell"
+//    static let cellID = "currencyCell"
     
     let currencyLabel : UILabel = {
         let label = UILabel()

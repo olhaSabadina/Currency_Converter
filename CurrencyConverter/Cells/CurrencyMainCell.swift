@@ -12,13 +12,12 @@ class CurrencyMainCell: UITableViewCell {
     let currencyTextField = UITextField()
     let currencyLabel = UILabel()
     var stack = UIStackView()
-    
+    var currancy: Currency?
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         setupStackView()
-        configLable()
     }
     
     required init?(coder: NSCoder) {
@@ -38,13 +37,15 @@ class CurrencyMainCell: UITableViewCell {
         currencyTextField.setContentHuggingPriority(.init(200), for: .horizontal)
         stack.distribution = .fill
         stack.spacing = 30
+        currencyLabel.textAlignment = .left
         addSubview(stack)
     }
     
-    func configLable() {
-        currencyLabel.translatesAutoresizingMaskIntoConstraints = false
-        currencyLabel.text = "UAH" + " >"
-        currencyLabel.textAlignment = .left
+    func configCell() {
+        
+        currencyLabel.text = (currancy?.currency ?? "") + " >"
+        currencyTextField.text = "\(currancy?.saleRate ?? 0)"
+ 
     }
     
 }
