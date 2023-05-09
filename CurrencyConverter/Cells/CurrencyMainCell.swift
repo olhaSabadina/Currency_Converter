@@ -41,11 +41,42 @@ class CurrencyMainCell: UITableViewCell {
         addSubview(stack)
     }
     
-    func configCell() {
+    func setupTextField(){
+        currencyTextField.borderStyle = .roundedRect
+        currencyTextField.backgroundColor = .secondarySystemBackground
+        currencyTextField.keyboardType = .numberPad
+        currencyTextField.returnKeyType = .done
+        currencyTextField.addDoneButtonToKeyboard(myAction: #selector(currencyTextField.resignFirstResponder))
+    }
+    func setupLabel(sell: Bool, nbu: Bool = false, valueFromTF: Double) {
+        guard let currency = currancy else {return}
+        currencyLabel.setLabelRightIcon(text: currency.currency, rightIcon: UIImage(systemName: "chevron.right"))
+        currencyTextField.notLayerTF()
         
-        currencyLabel.text = (currancy?.currency ?? "") + " >"
-        currencyTextField.text = "\(currancy?.saleRate ?? 0)"
- 
+        if let value = currency.textFieldDoubleValue {
+            currencyTextField.text = "\(Double(value))"
+            currencyTextField.blueLayerTF()
+            return
+        }
+       
+        guard currency.currency != "UAH" else {
+            currencyTextField.text = String(format: "%.2f", valueFromTF)
+            return}
+        
+        if sell && nbu {
+            currencyTextField.text = conversionValue(valueCurrency: currency.saleRateNB, valueTF: valueFromTF)
+        } else if sell && !nbu {
+            currencyTextField.text = conversionValue(valueCurrency: currency.saleRate, valueTF: valueFromTF)
+        } else if !sell && nbu {
+            currencyTextField.text = conversionValue(valueCurrency: currency.purchaseRateNB, valueTF: valueFromTF)
+        } else if !sell && !nbu {
+            currencyTextField.text = conversionValue(valueCurrency: currency.purchaseRate, valueTF: valueFromTF)
+        }
+        
+        func conversionValue(valueCurrency: Double?, valueTF: Double) -> String {
+            guard let value = valueCurrency else {return "Value not received"}
+            return String(format: "%.2f", (valueTF / value))
+        }
     }
     
 }

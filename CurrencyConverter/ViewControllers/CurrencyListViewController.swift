@@ -37,7 +37,7 @@ class CurrencyListViewController: UIViewController {
     }
     
     func setView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .secondarySystemBackground
         title = "Currencies List"
     }
     
@@ -48,6 +48,11 @@ class CurrencyListViewController: UIViewController {
         view.addSubview(tableCurrences)
         tableCurrences.register(CurrencyListCell.self, forCellReuseIdentifier: CurrencyListViewController.cellID)
         
+        tableCurrences.backgroundColor = .clear
+        tableCurrences.layer.shadowColor = UIColor.black.cgColor
+        tableCurrences.layer.shadowOffset = .init(width: 0, height: 3)
+        tableCurrences.layer.shadowRadius = 1
+        tableCurrences.layer.shadowOpacity = 0.3
     }
     
     private func setupLeftBarButton() {

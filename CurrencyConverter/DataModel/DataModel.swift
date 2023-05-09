@@ -27,6 +27,7 @@ struct Currency: Codable {
     let purchaseRateNB: Double?
     let saleRate: Double?
     let purchaseRate: Double?
+    var textFieldDoubleValue: Double?
     
     var fullCurrensyName: String {
     return currency + " - " + (currencesDictionary[currency] ?? "not data")

@@ -9,7 +9,7 @@ import UIKit
 
 class CurrencyMainView: UIView {
 
-    private let exchangeRateSegmentedControl = UISegmentedControl(items: ["Sell", "Buy"])
+    let exchangeRateSegmentedControl = UISegmentedControl(items: ["Sell", "Buy"])
     let addCurrencyButton = UIButton(type: .system)
     let shareButton = UIButton(type: .system)
     let currencyTableView = UITableView()
@@ -30,14 +30,6 @@ class CurrencyMainView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc func segmentAction(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-           
-        } else if sender.selectedSegmentIndex == 1 {
-            
-        }
     }
     
     private func  setSettingsView() {
@@ -66,7 +58,6 @@ class CurrencyMainView: UIView {
         exchangeRateSegmentedControl.selectedSegmentIndex = 0
         exchangeRateSegmentedControl.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         exchangeRateSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)], for: .normal)
-        exchangeRateSegmentedControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
     }
     
     private func configAddCurrencyButton() {

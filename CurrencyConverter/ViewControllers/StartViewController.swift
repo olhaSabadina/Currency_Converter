@@ -16,15 +16,29 @@ class StartViewController: UIViewController {
     private let nationalBankExchangeRateButton = UIButton(type: .system)
     private let currencyView = CurrencyMainView()
     private var currensiesArrayFromNet: [Currency] = []
+    private var valueTF: Double = 1
+    private var datePicker: DatePickerView!
     
     private var currensiesArray: [Currency] = [] {
         didSet {
             currencyView.reloadTable()
         }
     }
-
-//MARK: - live cycle App:
-
+    
+    private var saleCourse = true {
+        didSet{
+            currencyView.reloadTable()
+        }
+    }
+    private var nbuCourse = false {
+        didSet{
+            currencyView.reloadTable()
+        }
+    }
+    
+    
+    //MARK: - live cycle App:
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -40,7 +54,15 @@ class StartViewController: UIViewController {
         fetchDataFromNet()
     }
     
-//MARK: - objc Function:
+    //MARK: - objc Function:
+    
+    @objc func segmentAction(sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            saleCourse = true
+        } else if sender.selectedSegmentIndex == 1 {
+            saleCourse = false
+        }
+    }
     
     @objc func openCurrencyListVC() {
         let currencyListVC = CurrencyListViewController()
@@ -52,8 +74,15 @@ class StartViewController: UIViewController {
         navigationController?.present(navContrroler, animated: true)
     }
     
-//MARK: - Function:
-
+    
+    @objc func chooseDateForNBCourse() {
+        datePicker = DatePickerView(frame: self.view.frame)
+//        datePicker.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.addSubview(datePicker)
+    }
+    
+    //MARK: - Function:
+    
     private func setUpView() {
         view.addSubview(backgroundImageView)
         backgroundImageView.addSubview(appNameLabel)
@@ -65,6 +94,8 @@ class StartViewController: UIViewController {
     
     func addTargetsForButtons() {
         currencyView.addCurrencyButton.addTarget(self, action: #selector(openCurrencyListVC), for: .touchUpInside)
+        currencyView.exchangeRateSegmentedControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
+        nationalBankExchangeRateButton.addTarget(self, action: #selector(chooseDateForNBCourse), for: .touchUpInside)
         
     }
     
@@ -108,7 +139,6 @@ class StartViewController: UIViewController {
         nationalBankExchangeRateButton.layer.borderColor = UIColor.systemBlue.cgColor
         nationalBankExchangeRateButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
         
-        //        nationalBankExchangeRateButton.addTarget(self, action: #selector(), for: .touchUpInside)
         
     }
     
@@ -123,8 +153,8 @@ class StartViewController: UIViewController {
             guard let model = model else {return}
             self.currensiesArrayFromNet = model.currences
             self.currensiesArrayFromNet.sort {$0.currency < $1.currency}
-            }
         }
+    }
 }
 
 //MARK: - UITableViewDelegate
@@ -132,8 +162,27 @@ class StartViewController: UIViewController {
 extension StartViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! CurrencyMainCell
+        cell.selectionStyle = .none
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        cell.currencyTextField.becomeFirstResponder()
+        cell.currencyTextField.delegate = self
         
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return indexPath.row != 0 ? .delete : .none
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            currensiesArray.remove(at: indexPath.row)
+            
+        }
+    }
+    
 }
 
 //MARK: - UITableViewDataSource
@@ -142,13 +191,16 @@ extension StartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currensiesArray.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CurrencyMainView.idMainTableViewCell, for: indexPath) as? CurrencyMainCell else {return UITableViewCell()}
         cell.currancy = currensiesArray[indexPath.row]
-        cell.configCell()
+        cell.currencyTextField.tag = indexPath.row
+        cell.setupLabel(sell: saleCourse, nbu: nbuCourse, valueFromTF: valueTF)
         return cell
     }
+    
+    
 }
 
 //MARK: - UITextFieldDelegate:

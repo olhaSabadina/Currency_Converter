@@ -25,6 +25,9 @@
 		588A61FD29FFE4B900D36469 /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588A61FC29FFE4B900D36469 /* CurrencyModel.swift */; };
 		588A61FF2A013CCB00D36469 /* CurrencesDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588A61FE2A013CCB00D36469 /* CurrencesDictionary.swift */; };
 		588E0B6E2A0300F8001599BD /* TransformCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E0B6D2A0300F8001599BD /* TransformCurrency.swift */; };
+		588E0B752A0841A5001599BD /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E0B742A0841A5001599BD /* UILabelExtension.swift */; };
+		588E0B772A084255001599BD /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E0B762A084255001599BD /* UITextFieldExtension.swift */; };
+		588E0B792A09274F001599BD /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E0B782A09274F001599BD /* DatePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,9 @@
 		588A61FC29FFE4B900D36469 /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		588A61FE2A013CCB00D36469 /* CurrencesDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencesDictionary.swift; sourceTree = "<group>"; };
 		588E0B6D2A0300F8001599BD /* TransformCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformCurrency.swift; sourceTree = "<group>"; };
+		588E0B742A0841A5001599BD /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		588E0B762A084255001599BD /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		588E0B782A09274F001599BD /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +123,7 @@
 		5886124229F6700700B0C35B /* CurrencyConverter */ = {
 			isa = PBXGroup;
 			children = (
+				588E0B712A08410B001599BD /* Extensions */,
 				5886127629F67A2600B0C35B /* Applications */,
 				5886127729F67A8700B0C35B /* ViewControllers */,
 				5886127F29F7F86300B0C35B /* Views */,
@@ -187,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				5886128229F7F91600B0C35B /* CurrencyMainView.swift */,
+				588E0B782A09274F001599BD /* DatePickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,6 +224,15 @@
 				588A61FA29FFDDE800D36469 /* NetworkManager.swift */,
 			);
 			path = DataManager;
+			sourceTree = "<group>";
+		};
+		588E0B712A08410B001599BD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				588E0B742A0841A5001599BD /* UILabelExtension.swift */,
+				588E0B762A084255001599BD /* UITextFieldExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,9 +366,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5836C7F829FF00CA00CFA005 /* CurrencyListCell.swift in Sources */,
+				588E0B792A09274F001599BD /* DatePickerView.swift in Sources */,
+				588E0B752A0841A5001599BD /* UILabelExtension.swift in Sources */,
 				5886124829F6700700B0C35B /* StartViewController.swift in Sources */,
 				5836C7F629FF003A00CFA005 /* CurrencyListViewController.swift in Sources */,
 				5886128329F7F91600B0C35B /* CurrencyMainView.swift in Sources */,
+				588E0B772A084255001599BD /* UITextFieldExtension.swift in Sources */,
 				588A61FB29FFDDE800D36469 /* NetworkManager.swift in Sources */,
 				5886124E29F6700700B0C35B /* CurrencyConverter.xcdatamodeld in Sources */,
 				5886124429F6700700B0C35B /* AppDelegate.swift in Sources */,
