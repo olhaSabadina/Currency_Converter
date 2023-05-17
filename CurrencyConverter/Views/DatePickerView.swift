@@ -10,7 +10,7 @@ import UIKit
 class DatePickerView: UIView {
 
     var view = UIView()
-    private let datePicker = UIDatePicker()
+    let datePicker = UIDatePicker()
     let titleLabel = UILabel()
     let okButton = UIButton(type: .system)
     let cancelButton = UIButton(type: .system)
@@ -102,7 +102,7 @@ class DatePickerView: UIView {
         
     }
     
-    private func formateDate() -> String{
+    func formateDateFromNet() -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter.string(from: datePicker.date)

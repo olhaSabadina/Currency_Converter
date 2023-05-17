@@ -11,7 +11,7 @@ import Foundation
 struct NetworkFetchManager {
     
     func fetchCurrences(date: Date, completionhandler: @escaping (CurrencesModel?)->()){
-        guard let url = URL(string: "https://api.privatbank.ua/p24api/exchange_rates?json&date=01.05.2023") else {return}
+        guard let url = URL(string: "https://api.privatbank.ua/p24api/exchange_rates?json&date=\(date.formateDateToJsonRequest())") else {return}
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             

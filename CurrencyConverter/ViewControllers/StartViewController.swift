@@ -64,6 +64,17 @@ class StartViewController: UIViewController {
         }
     }
     
+    @objc func closeDatePicker(){
+        datePicker.removeFromSuperview()
+    }
+    
+    @objc func pushDateFromPicker(){
+        print(datePicker.datePicker.date.formateDateToJsonRequest(), "получили новую дату")
+        nbuCourse = true
+        datePicker.removeFromSuperview()
+
+    }
+    
     @objc func openCurrencyListVC() {
         let currencyListVC = CurrencyListViewController()
         let navContrroler = UINavigationController(rootViewController: currencyListVC)
@@ -77,7 +88,12 @@ class StartViewController: UIViewController {
     
     @objc func chooseDateForNBCourse() {
         datePicker = DatePickerView(frame: self.view.frame)
-//        datePicker.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        datePicker.cancelButton.addTarget(self, action: #selector(closeDatePicker), for: .touchUpInside)
+        datePicker.okButton.addTarget(self, action: #selector(pushDateFromPicker), for: .touchUpInside)
+
+
+
+
         view.addSubview(datePicker)
     }
     
