@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CurrencesModel {
+struct CurrenciesModel {
     let date : String
     let currences: [Currency]
     

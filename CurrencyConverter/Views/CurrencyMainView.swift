@@ -100,10 +100,10 @@ class CurrencyMainView: UIView {
             shareButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             shareButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             
-            currencyTableView.topAnchor.constraint(equalTo: exchangeRateSegmentedControl.bottomAnchor, constant: 20),
+            currencyTableView.topAnchor.constraint(equalTo: exchangeRateSegmentedControl.bottomAnchor, constant: 10),
             currencyTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             currencyTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            currencyTableView.bottomAnchor.constraint(equalTo: addCurrencyButton.topAnchor, constant: -20)
+            currencyTableView.bottomAnchor.constraint(equalTo: addCurrencyButton.topAnchor, constant: -5)
             
         ])
     }

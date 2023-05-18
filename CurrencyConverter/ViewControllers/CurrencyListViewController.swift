@@ -11,16 +11,15 @@ class CurrencyListViewController: UIViewController {
     
     static let cellID = "currencyCell"
     
+    var currencyArrayFromNet: [Currency]?
     var completionChooseCurrency: ((Currency)->())?
     
-    var currencyArrayFromNet = [Currency]()
     var tableCurrences = UITableView()
     let searchController = UISearchController()
     var transformCur = TransformCurrency()
     var filteredDataToSections: [Currency] = []
     var arrayCurrencyForTableWithSection: [[Currency]] = []
     var headerTitlesArray: [String]?
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +28,7 @@ class CurrencyListViewController: UIViewController {
         setupLeftBarButton()
         setupSearchController()
         transformArrayForTableWithSections(model: currencyArrayFromNet)
-        print(currencyArrayFromNet.count, "массив валют с нета")
+        print(currencyArrayFromNet?.count, "массив валют с нета")
     }
     
     @objc func back(){
@@ -71,10 +70,12 @@ class CurrencyListViewController: UIViewController {
         searchController.searchBar.delegate = self
     }
     
-    func transformArrayForTableWithSections(model: [Currency]) {
-        transformCur.createDataSourceHeaderAndSectionsArray(model: model)
-            headerTitlesArray = transformCur.headerArray
-            arrayCurrencyForTableWithSection = transformCur.sectionsArray
+    func transformArrayForTableWithSections(model: [Currency]?) {
+        
+        guard let models = model else {return}
+        self.transformCur.createDataSourceHeaderAndSectionsArray(model: models)
+        self.headerTitlesArray = self.transformCur.headerArray
+        self.arrayCurrencyForTableWithSection = self.transformCur.sectionsArray
             DispatchQueue.main.async {
                 self.tableCurrences.reloadData()
             }
@@ -142,7 +143,8 @@ extension CurrencyListViewController: UISearchControllerDelegate, UISearchBarDel
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        filteredDataToSections = currencyArrayFromNet.filter({$0.fullCurrensyName.lowercased().contains(searchText.lowercased())})
+        guard let currencies = currencyArrayFromNet else {return}
+        filteredDataToSections = currencies.filter({$0.fullCurrensyName.lowercased().contains(searchText.lowercased())})
         tableCurrences.reloadData()
     }
     

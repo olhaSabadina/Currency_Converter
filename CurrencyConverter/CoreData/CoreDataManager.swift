@@ -83,9 +83,9 @@ class CoreDataManager {
     func newjsonCurrencys(jsonCurrencyData: Data?, date: Date) {
         
         let newjsonCurrencys = JsonCurrencys(context: context)
-        
+        guard let dataJson = jsonCurrencyData else {return}
         newjsonCurrencys.dateFetch = date
-        newjsonCurrencys.jsonData = jsonCurrencyData
+        newjsonCurrencys.jsonData = dataJson
         print("create jsonCurrency")
         saveContext()
        
