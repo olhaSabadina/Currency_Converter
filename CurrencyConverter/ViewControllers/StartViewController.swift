@@ -22,24 +22,21 @@ class StartViewController: UIViewController {
     private var datePicker: DatePickerView!
     private var currensItemToReSave: Currency?
     
-    private var currensiesArrayFromNet: [Currency] = [] {
+    private var currensyArray: [Currency] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.currencyView.addCurrencyButton.isHidden = self.currensiesArrayFromNet.count >= self.numberRowsInMainTable ? true : false
+                self.currencyView.addCurrencyButton.isHidden = self.currensyArray.count >= self.numberRowsInMainTable ? true : false
             }
-            currencyView.reloadTable()
+            reloadTable()
         }
     }
     private var saleCourse = true {
         didSet{
-            currencyView.reloadTable()
+           reloadTable()
         }
     }
-    private var nbuCourse = false {
-        didSet{
-            currencyView.reloadTable()
-        }
-    }
+    private var nbuCourse = false
+    
     private var dateFetchToLabel: Date! {
         didSet{
             updateDateLabel(dateUpdate: dateFetchToLabel)
@@ -60,7 +57,7 @@ class StartViewController: UIViewController {
         configCurrencyView()
         addTargetsForButtons()
         setConstraints()
-        fetchDataFromNet(Date())
+        fetchDataFromCoreData(Date())
     }
     
     //MARK: - objc Function:
@@ -91,8 +88,8 @@ class StartViewController: UIViewController {
         let navContrroler = UINavigationController(rootViewController: currencyListVC)
         currencyListVC.completionChooseCurrency = {[weak self] currencyChoose in
             guard let self = self else {return}
-            if self.currensiesArrayFromNet.count < self.numberRowsInMainTable {
-                self.currensiesArrayFromNet.append(currencyChoose)
+            if self.currensyArray.count < self.numberRowsInMainTable {
+                self.currensyArray.append(currencyChoose)
                 self.coreData.newCurrencyCore(currencyChoose)
             }
         }
@@ -207,7 +204,7 @@ class StartViewController: UIViewController {
         let alert = UIAlertController(title: "Attention\nData not received.", message: "Please check your internet connection", preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "OK", style: .cancel){_ in
             self.lastUpdatedLabel.text = "Not internet\nConnection"
-            self.currensiesArrayFromNet = []
+            self.currensyArray = []
         }
         alert.addAction(actionOk)
         present(alert, animated: true)
@@ -249,7 +246,14 @@ class StartViewController: UIViewController {
                 }
             }
         }
-        currensiesArrayFromNet = mokcurrencysArray
+        currensyArray = mokcurrencysArray
+    }
+    
+    func reloadTable(){
+        DispatchQueue.main.async {
+            self.currencyView.currencyTableView.reloadData()
+        }
+        print("перезагрузилась таблица")
     }
     
 }
@@ -259,25 +263,26 @@ class StartViewController: UIViewController {
 extension StartViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! CurrencyMainCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? CurrencyMainCell else {return}
         cell.selectionStyle = .none
-        tableView.deselectRow(at: indexPath, animated: false)
+//        tableView.deselectRow(at: indexPath, animated: false)
         
         cell.currencyTextField.becomeFirstResponder()
         cell.currencyTextField.delegate = self
+        currensItemToReSave = cell.currency
         
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return indexPath.row != 0 ? .delete : .none
+        if cell.number != nil {
+            print(cell.number ?? "nil")
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        guard let cellCurrency = (tableView.cellForRow(at: indexPath) as! CurrencyMainCell).currancy else {return}
+        guard let cellCurrency = (tableView.cellForRow(at: indexPath) as! CurrencyMainCell).currency else {return}
 
         if editingStyle == .delete {
-            currensiesArrayFromNet.remove(at: indexPath.row)
+            currensyArray.remove(at: indexPath.row)
             coreData.deleteCurrencyCore(currencyToDelete: cellCurrency)
         }
     }
@@ -288,14 +293,17 @@ extension StartViewController: UITableViewDelegate {
 
 extension StartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currensiesArrayFromNet.count
+        return currensyArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CurrencyMainView.idMainTableViewCell, for: indexPath) as? CurrencyMainCell else {return UITableViewCell()}
-        cell.currancy = currensiesArrayFromNet[indexPath.row]
+        cell.currency = currensyArray[indexPath.row]
         cell.currencyTextField.tag = indexPath.row
         cell.setupLabel(sell: saleCourse, nbu: nbuCourse, valueFromTF: valueTF)
+        if indexPath.row == 1 {
+            cell.number = 48
+        }
         return cell
     }
     
@@ -313,16 +321,16 @@ extension StartViewController: UITextFieldDelegate {
         else {return true}
        
         //Обнуляем значение textFieldDoubleValue во всех валютах в массиве currensiesArrayFromNet
-        currensiesArrayFromNet.indices.forEach { item in
-            currensiesArrayFromNet[item].textFieldDoubleValue = nil
+        currensyArray.indices.forEach { item in
+            currensyArray[item].textFieldDoubleValue = nil
         }
         
-        if let i = currensiesArrayFromNet.firstIndex(where: { $0.currency == currensValue.currency}) {
-            currensiesArrayFromNet[i].textFieldDoubleValue = valueTFDouble
+        if let i = currensyArray.firstIndex(where: { $0.currency == currensValue.currency}) {
+            currensyArray[i].textFieldDoubleValue = valueTFDouble
         }
         valueTF = textField.tag == 0 ? valueTFDouble : valueTFDouble * (currensValue.saleRateNB ?? 0)
         
-        currencyView.reloadTable()
+        reloadTable()
         return true
     }
     

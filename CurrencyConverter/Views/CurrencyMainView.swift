@@ -104,17 +104,8 @@ class CurrencyMainView: UIView {
             currencyTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             currencyTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             currencyTableView.bottomAnchor.constraint(equalTo: addCurrencyButton.topAnchor, constant: -5)
-            
         ])
     }
-    
-    func reloadTable(){
-        DispatchQueue.main.async {
-            self.currencyTableView.reloadData()
-        }
-        
-    }
-    
 }
 
 

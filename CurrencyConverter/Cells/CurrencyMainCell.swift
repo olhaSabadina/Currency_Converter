@@ -12,12 +12,14 @@ class CurrencyMainCell: UITableViewCell {
     let currencyTextField = UITextField()
     let currencyLabel = UILabel()
     var stack = UIStackView()
-    var currancy: Currency?
+    var currency: Currency?
+    var number: Int?
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         setupStackView()
+        setupTextField()
     }
     
     required init?(coder: NSCoder) {
@@ -48,8 +50,9 @@ class CurrencyMainCell: UITableViewCell {
         currencyTextField.returnKeyType = .done
         currencyTextField.addDoneButtonToKeyboard(myAction: #selector(currencyTextField.resignFirstResponder))
     }
+    
     func setupLabel(sell: Bool, nbu: Bool = false, valueFromTF: Double) {
-        guard let currency = currancy else {return}
+        guard let currency = currency else {return}
         currencyLabel.setLabelRightIcon(text: currency.currency, rightIcon: UIImage(systemName: "chevron.right"))
         currencyTextField.notLayerTF()
         
