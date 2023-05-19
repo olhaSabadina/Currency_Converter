@@ -12,7 +12,7 @@ class StartViewController: UIViewController {
     private let numberRowsInMainTable = 6
     private let backgroundImageView = UIImageView()
     private let appNameLabel = UILabel()
-    private let lastUpdatedLabel = UILabel()
+    let lastUpdatedLabel = UILabel()
     private let nationalBankExchangeRateButton = UIButton(type: .system)
     private let currencyView = CurrencyMainView()
     private var currenciesFromInternet: [Currency]?
@@ -22,7 +22,7 @@ class StartViewController: UIViewController {
     private var datePicker: DatePickerView!
     private var currensItemToReSave: Currency?
     
-    private var currensyArray: [Currency] = [] {
+    var currensyArray: [Currency] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.currencyView.addCurrencyButton.isHidden = self.currensyArray.count >= self.numberRowsInMainTable ? true : false
@@ -111,7 +111,22 @@ class StartViewController: UIViewController {
         }
     }
         
-    
+    @objc private func choiseShared(){
+        let alert = UIAlertController(title: "Choose what you want to share", message: nil, preferredStyle: .actionSheet)
+        
+        let textAction = UIAlertAction(title: "Share text", style: .default){_ in
+            self.shareText()
+        }
+        let imageAction = UIAlertAction(title: "Share image", style: .default){_ in
+            self.shareScreenShotImage()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(textAction)
+        alert.addAction(imageAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
     
     //MARK: - Function:
     
@@ -132,7 +147,7 @@ class StartViewController: UIViewController {
         currencyView.addCurrencyButton.addTarget(self, action: #selector(openCurrencyListVC), for: .touchUpInside)
         currencyView.exchangeRateSegmentedControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
         nationalBankExchangeRateButton.addTarget(self, action: #selector(chooseDateForNBCourse), for: .touchUpInside)
-//        currencyView.shareButton.addTarget(self, action: #selector(choiseShared), for: .touchUpInside)
+        currencyView.shareButton.addTarget(self, action: #selector(choiseShared), for: .touchUpInside)
 
     }
     
