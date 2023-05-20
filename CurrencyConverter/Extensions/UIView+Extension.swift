@@ -8,7 +8,7 @@
 import UIKit
 
 class UIView_Extension: UIView {
-
+    
     func takeScreenShot() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, UIScreen.main.scale)
         drawHierarchy(in: self.bounds, afterScreenUpdates: true)
@@ -20,5 +20,4 @@ class UIView_Extension: UIView {
         }
         return UIImage()
     }
-
 }

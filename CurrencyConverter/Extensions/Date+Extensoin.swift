@@ -35,5 +35,4 @@ extension Date {
         return abs(hours) < 20 ? true : false
         
     }
-    
 }

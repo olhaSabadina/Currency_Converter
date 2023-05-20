@@ -8,9 +8,7 @@
 import UIKit
 
 class CurrencyListCell: UITableViewCell {
-    
-//    static let cellID = "currencyCell"
-    
+        
     let currencyLabel : UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17)
@@ -21,7 +19,7 @@ class CurrencyListCell: UITableViewCell {
         super.layoutSubviews()
         currencyLabel.frame = CGRect(x: 10, y: 5, width: contentView.frame.width - 20, height: contentView.frame.height - 10)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -29,7 +27,7 @@ class CurrencyListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(currencyLabel)
-      }
+    }
     
     func setLabel(currency: Currency){
         currencyLabel.text = currency.fullCurrensyName

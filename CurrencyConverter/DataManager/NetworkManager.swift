@@ -28,9 +28,7 @@ struct NetworkFetchManager {
                 completionhandler(nil, NetworkRequestError.statusCode)
             }
             
-//            if let currences = parseJSON(data: data) {
                 completionhandler(data, nil)
-//            }
         }
         task.resume()
     }

@@ -45,5 +45,4 @@ extension StartViewController {
         resultString.append(lastUpdatedLabel.text ?? "")
         return resultString
     }
-    
 }

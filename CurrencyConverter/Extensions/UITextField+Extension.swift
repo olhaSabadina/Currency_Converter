@@ -27,15 +27,14 @@ extension UITextField{
     }
     
     func blueLayerTF(){
-            self.layer.borderColor = UIColor.blue.cgColor
-            self.layer.borderWidth = 1
-            self.layer.cornerRadius = 10
-            self.layer.masksToBounds = true
+        self.layer.borderColor = UIColor.blue.cgColor
+        self.layer.borderWidth = 1
+        self.layer.cornerRadius = 10
+        self.layer.masksToBounds = true
     }
     
     func notLayerTF(){
-            self.layer.borderColor = nil
-            self.layer.borderWidth = 0
+        self.layer.borderColor = nil
+        self.layer.borderWidth = 0
     }
-
 }

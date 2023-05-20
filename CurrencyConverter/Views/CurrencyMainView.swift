@@ -8,7 +8,7 @@
 import UIKit
 
 class CurrencyMainView: UIView {
-
+    
     let exchangeRateSegmentedControl = UISegmentedControl(items: ["Sell", "Buy"])
     let addCurrencyButton = UIButton(type: .system)
     let shareButton = UIButton(type: .system)
@@ -27,7 +27,7 @@ class CurrencyMainView: UIView {
         configCurrencyTableView()
         setConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -49,7 +49,6 @@ class CurrencyMainView: UIView {
         addSubview(currencyTableView)
     }
     
-
     private func configExchangeRateSegmentedControl() {
         exchangeRateSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
         exchangeRateSegmentedControl.backgroundColor = .white
@@ -71,8 +70,6 @@ class CurrencyMainView: UIView {
     private func configShareButton() {
         shareButton.translatesAutoresizingMaskIntoConstraints = false
         shareButton.setBackgroundImage(UIImage(named: "square.and.arrow.up"), for: .normal)
-       
-//        shareButton.addTarget(self, action: #selector(), for: .touchUpInside)
     }
     
     private func configCurrencyTableView() {
@@ -80,7 +77,6 @@ class CurrencyMainView: UIView {
         currencyTableView.translatesAutoresizingMaskIntoConstraints = false
         currencyTableView.rowHeight = 70
         currencyTableView.separatorStyle = .none
-        
     }
     
     private func setConstraints() {
@@ -89,7 +85,7 @@ class CurrencyMainView: UIView {
             exchangeRateSegmentedControl.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             exchangeRateSegmentedControl.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             exchangeRateSegmentedControl.heightAnchor.constraint(equalToConstant: 40),
-
+            
             addCurrencyButton.heightAnchor.constraint(equalToConstant: 30),
             addCurrencyButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             addCurrencyButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),

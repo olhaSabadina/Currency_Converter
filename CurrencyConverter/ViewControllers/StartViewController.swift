@@ -32,7 +32,7 @@ class StartViewController: UIViewController {
     }
     private var saleCourse = true {
         didSet{
-           reloadTable()
+            reloadTable()
         }
     }
     private var nbuCourse = false
@@ -75,12 +75,10 @@ class StartViewController: UIViewController {
     }
     
     @objc func pushDateFromPicker(){
-        print(datePicker.datePicker.date.formateDateToJsonRequest(), "получили новую дату")
         nationalBankExchangeRateButton.setTitle("Return to course PB", for: .normal)
         nbuCourse = true
         fetchDataFromCoreData(datePicker.datePicker.date)
         closeDatePicker()
-
     }
     
     @objc func openCurrencyListVC() {
@@ -97,7 +95,6 @@ class StartViewController: UIViewController {
         navigationController?.present(navContrroler, animated: true)
     }
     
-    
     @objc func chooseDateForNBCourse() {
         if !nbuCourse {
             datePicker = DatePickerView(frame: self.view.frame)
@@ -107,10 +104,9 @@ class StartViewController: UIViewController {
         } else {
             nbuCourse = false
             nationalBankExchangeRateButton.setTitle("National Bank Exchange Rate", for: .normal)
-            
         }
     }
-        
+    
     @objc private func choiseShared(){
         let alert = UIAlertController(title: "Choose what you want to share", message: nil, preferredStyle: .actionSheet)
         
@@ -148,7 +144,6 @@ class StartViewController: UIViewController {
         currencyView.exchangeRateSegmentedControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
         nationalBankExchangeRateButton.addTarget(self, action: #selector(chooseDateForNBCourse), for: .touchUpInside)
         currencyView.shareButton.addTarget(self, action: #selector(choiseShared), for: .touchUpInside)
-
     }
     
     private func configBackgroundImageView() {
@@ -188,8 +183,6 @@ class StartViewController: UIViewController {
         nationalBankExchangeRateButton.layer.cornerRadius = 15
         nationalBankExchangeRateButton.layer.borderColor = UIColor.systemBlue.cgColor
         nationalBankExchangeRateButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        
-        
     }
     
     private func configCurrencyView() {
@@ -201,13 +194,11 @@ class StartViewController: UIViewController {
     func fetchDataFromNet(_ date: Date){
         NetworkFetchManager().fetchCurrences(for: date) { data, error in
             guard let data = data else {
-                print("!!! данные с интернета не получены")
                 DispatchQueue.main.async {
                     self.alertNoInternet()
                 }
                 return
             }
-            print("данные с интернета получены")
             self.coreData.newjsonCurrencys(jsonCurrencyData: data, date: date)
             self.transformDataToCurrencyModelAndRecordCurrencyArrayFromInternet(data)
             self.addStoreCurrencystoCurrencyArrayForTable(self.arrayCurrencysFromCoreData)
@@ -224,20 +215,15 @@ class StartViewController: UIViewController {
         alert.addAction(actionOk)
         present(alert, animated: true)
     }
-
+    
     private func fetchDataFromCoreData(_ dateToFetch: Date) {
         let jsonCurrencys = coreData.getJsonCurrencysForDate(date: dateToFetch)
-        // Записываем массив имен валют из коре Даты которые у нас в основной таблице
         arrayCurrencysFromCoreData = coreData.getCurrencyFromCore()
-        print(arrayCurrencysFromCoreData, "Array bykv")
         
         guard let jsonData = jsonCurrencys?.jsonData else {
-            print("дата не получил с коре")
-            //Если отсутствуют то берем данные с интернета
             fetchDataFromNet(dateToFetch)
             return}
         
-        // Берем данные с кореДата и трансформируем их
         dateFetchToLabel = jsonCurrencys?.dateFetch
         transformDataToCurrencyModelAndRecordCurrencyArrayFromInternet(jsonData)
         addStoreCurrencystoCurrencyArrayForTable(arrayCurrencysFromCoreData)
@@ -268,9 +254,7 @@ class StartViewController: UIViewController {
         DispatchQueue.main.async {
             self.currencyView.currencyTableView.reloadData()
         }
-        print("перезагрузилась таблица")
     }
-    
 }
 
 //MARK: - UITableViewDelegate
@@ -280,28 +264,21 @@ extension StartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? CurrencyMainCell else {return}
         cell.selectionStyle = .none
-//        tableView.deselectRow(at: indexPath, animated: false)
         
         cell.currencyTextField.becomeFirstResponder()
         cell.currencyTextField.delegate = self
         currensItemToReSave = cell.currency
-        
-        if cell.number != nil {
-            print(cell.number ?? "nil")
-        }
-        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         guard let cellCurrency = (tableView.cellForRow(at: indexPath) as! CurrencyMainCell).currency else {return}
-
+        
         if editingStyle == .delete {
             currensyArray.remove(at: indexPath.row)
             coreData.deleteCurrencyCore(currencyToDelete: cellCurrency)
         }
     }
-    
 }
 
 //MARK: - UITableViewDataSource
@@ -316,13 +293,8 @@ extension StartViewController: UITableViewDataSource {
         cell.currency = currensyArray[indexPath.row]
         cell.currencyTextField.tag = indexPath.row
         cell.setupLabel(sell: saleCourse, nbu: nbuCourse, valueFromTF: valueTF)
-        if indexPath.row == 1 {
-            cell.number = 48
-        }
         return cell
     }
-    
-    
 }
 
 //MARK: - UITextFieldDelegate:
@@ -334,8 +306,7 @@ extension StartViewController: UITextFieldDelegate {
               let valueTFDouble = Double(value),
               let currensValue = currensItemToReSave
         else {return true}
-       
-        //Обнуляем значение textFieldDoubleValue во всех валютах в массиве currensiesArrayFromNet
+        
         currensyArray.indices.forEach { item in
             currensyArray[item].textFieldDoubleValue = nil
         }
@@ -370,7 +341,7 @@ extension StartViewController {
             
             lastUpdatedLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             lastUpdatedLabel.bottomAnchor.constraint(equalTo: nationalBankExchangeRateButton.topAnchor, constant: -30),
-                        
+            
             nationalBankExchangeRateButton.heightAnchor.constraint(equalToConstant: 40),
             nationalBankExchangeRateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nationalBankExchangeRateButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),

@@ -8,7 +8,7 @@
 import UIKit
 
 class DatePickerView: UIView {
-
+    
     var view = UIView()
     let datePicker = UIDatePicker()
     let titleLabel = UILabel()
@@ -22,7 +22,6 @@ class DatePickerView: UIView {
         setUpView()
         configViewElements()
         setConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -38,7 +37,6 @@ class DatePickerView: UIView {
     }
     
     private func configViewElements() {
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +47,6 @@ class DatePickerView: UIView {
         configureTitleLabel()
         configureButtons()
         configureDatePicker()
-                
     }
     
     private func configureView() {
@@ -60,16 +57,15 @@ class DatePickerView: UIView {
         view.layer.shadowOffset = .init(width: 2, height: 5)
         view.layer.shadowRadius = 4
         view.layer.masksToBounds = false
-
     }
     
     func setBlurEffect(){
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.systemUltraThinMaterialLight )
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            blurEffectView.frame = self.bounds
-            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            addSubview(blurEffectView)
-        }
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(blurEffectView)
+    }
     
     private func configureTitleLabel(){
         titleLabel.text = "Select a date to search for the National Bank exchange rate"
@@ -99,7 +95,6 @@ class DatePickerView: UIView {
         datePicker.minimumDate = minimumDate
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "uk")
-        
     }
     
     func formateDateFromNet() -> String{
@@ -143,8 +138,5 @@ class DatePickerView: UIView {
             datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             datePicker.bottomAnchor.constraint(lessThanOrEqualTo: okButton.topAnchor, constant: -16)
         ])
-        
-        
     }
-    
 }

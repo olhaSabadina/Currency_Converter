@@ -28,7 +28,6 @@ class CurrencyListViewController: UIViewController {
         setupLeftBarButton()
         setupSearchController()
         transformArrayForTableWithSections(model: currencyArrayFromNet)
-        print(currencyArrayFromNet?.count, "массив валют с нета")
     }
     
     @objc func back(){
@@ -76,12 +75,11 @@ class CurrencyListViewController: UIViewController {
         self.transformCur.createDataSourceHeaderAndSectionsArray(model: models)
         self.headerTitlesArray = self.transformCur.headerArray
         self.arrayCurrencyForTableWithSection = self.transformCur.sectionsArray
-            DispatchQueue.main.async {
-                self.tableCurrences.reloadData()
-            }
+        DispatchQueue.main.async {
+            self.tableCurrences.reloadData()
+        }
     }
 }
-
 
 //MARK: - Table Delegate DataSource:
 extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -104,7 +102,6 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
         }
         return arrayCurrencyForTableWithSection.count
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -131,7 +128,6 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
         }
         return headerTitlesArray?[section]
     }
-    
 }
 
 //MARK: - Search Controller Configuration
@@ -147,5 +143,4 @@ extension CurrencyListViewController: UISearchControllerDelegate, UISearchBarDel
         filteredDataToSections = currencies.filter({$0.fullCurrensyName.lowercased().contains(searchText.lowercased())})
         tableCurrences.reloadData()
     }
-    
 }

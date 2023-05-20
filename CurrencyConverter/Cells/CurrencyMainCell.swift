@@ -15,7 +15,6 @@ class CurrencyMainCell: UITableViewCell {
     var currency: Currency?
     var number: Int?
     
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         setupStackView()
@@ -30,7 +29,7 @@ class CurrencyMainCell: UITableViewCell {
         super.layoutSubviews()
         stack.frame = CGRect(x: 10, y: 10, width: contentView.frame.width - 20, height: contentView.frame.height - 20)
     }
-
+    
     func setupStackView() {
         stack = UIStackView(arrangedSubviews: [currencyLabel,currencyTextField])
         stack.axis = .horizontal
@@ -61,7 +60,7 @@ class CurrencyMainCell: UITableViewCell {
             currencyTextField.blueLayerTF()
             return
         }
-       
+        
         guard currency.currency != "UAH" else {
             currencyTextField.text = String(format: "%.2f", valueFromTF)
             return}
@@ -81,7 +80,6 @@ class CurrencyMainCell: UITableViewCell {
             return String(format: "%.2f", (valueTF / value))
         }
     }
-    
 }
 
 
