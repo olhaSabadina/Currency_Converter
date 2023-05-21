@@ -38,7 +38,7 @@ extension StartViewController {
         guard let array = array else {return ""}
         for item in array {
             if item.currency != "UAH" {
-                let str = "1 \(item.currency) = \(String(format: "%.3f", item.saleRateNB ?? 0)) UAH\n"
+                let str = "100 \(item.currency) = \(String(format: "%.3f", ((item.saleRateNB ?? 0) * 100))) UAH\n"
                 resultString.append(str)
             }
         }

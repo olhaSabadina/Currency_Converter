@@ -265,9 +265,11 @@ extension StartViewController: UITableViewDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? CurrencyMainCell else {return}
         cell.selectionStyle = .none
         
+        currensItemToReSave = cell.currency
+        
         cell.currencyTextField.becomeFirstResponder()
         cell.currencyTextField.delegate = self
-        currensItemToReSave = cell.currency
+        cell.contentView.isUserInteractionEnabled = false
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
