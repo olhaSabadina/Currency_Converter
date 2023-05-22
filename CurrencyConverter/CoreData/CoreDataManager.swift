@@ -21,7 +21,7 @@ class CoreDataManager {
         do{
             jsonCurrencys = try context.fetch(fetchRequest)
         } catch {
-            print("not fetch users")
+            print(CoreDataError.noFetchData)
         }
         
         for item in jsonCurrencys {
@@ -42,7 +42,7 @@ class CoreDataManager {
         do{
             currencyCore = try context.fetch(fetchRequest)
         } catch {
-            print("not fetch users")
+            print(CoreDataError.noFetchData)
         }
         
         var array = [String]()
@@ -85,7 +85,7 @@ class CoreDataManager {
         do{
             currencyCores = try context.fetch(fetchRequest)
         } catch {
-            print("not fetch users")
+            print(CoreDataError.noFetchData)
         }
         for item in currencyCores {
             if item.currencyName == currencyToDelete.currency {

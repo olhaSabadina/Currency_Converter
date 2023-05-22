@@ -48,13 +48,7 @@ class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        setUpView()
-        configBackgroundImageView()
-        configAppNameLabel()
-        configLastUpdatedLabel()
-        configNationalBankExchangeRateButton()
-        configCurrencyView()
+        configView()
         addTargetsForButtons()
         setConstraints()
         fetchDataFromCoreData(Date())
@@ -126,7 +120,17 @@ class StartViewController: UIViewController {
     
     //MARK: - Function:
     
+    private func configView(){
+        setUpView()
+        configBackgroundImageView()
+        configAppNameLabel()
+        configLastUpdatedLabel()
+        configNationalBankExchangeRateButton()
+        configCurrencyView()
+    }
+    
     private func setUpView() {
+        view.backgroundColor = .white
         view.addSubview(backgroundImageView)
         backgroundImageView.addSubview(appNameLabel)
         view.addSubview(lastUpdatedLabel)
@@ -175,7 +179,6 @@ class StartViewController: UIViewController {
     }
     
     private func configNationalBankExchangeRateButton() {
-        
         nationalBankExchangeRateButton.translatesAutoresizingMaskIntoConstraints = false
         nationalBankExchangeRateButton.setTitle("National Bank Exchange Rate", for: .normal)
         nationalBankExchangeRateButton.setTitleColor(UIColor.systemBlue, for: .normal)
@@ -269,6 +272,7 @@ extension StartViewController: UITableViewDelegate {
         
         cell.currencyTextField.becomeFirstResponder()
         cell.currencyTextField.delegate = self
+        cell.currencyTextField.blueLayerTF()
         cell.contentView.isUserInteractionEnabled = false
     }
     

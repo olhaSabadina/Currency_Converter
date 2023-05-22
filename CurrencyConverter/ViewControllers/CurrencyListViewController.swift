@@ -16,7 +16,7 @@ class CurrencyListViewController: UIViewController {
     
     var tableCurrences = UITableView()
     let searchController = UISearchController()
-    var transformCur = TransformCurrency()
+    var transformCur = TransformCurrencyToListArray()
     var filteredDataToSections: [Currency] = []
     var arrayCurrencyForTableWithSection: [[Currency]] = []
     var headerTitlesArray: [String]?
@@ -30,7 +30,7 @@ class CurrencyListViewController: UIViewController {
         transformArrayForTableWithSections(model: currencyArrayFromNet)
     }
     
-    @objc func back(){
+    @objc func backToStartViewController(){
         dismiss(animated: true)
     }
     
@@ -58,7 +58,7 @@ class CurrencyListViewController: UIViewController {
         backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         backButton.setTitle("Currency", for: .normal)
         backButton.sizeToFit()
-        backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backToStartViewController), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
     
@@ -93,7 +93,7 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
             currency = arrayCurrencyForTableWithSection[indexPath.section][indexPath.row]
         }
         completionChooseCurrency?(currency)
-        back()
+        backToStartViewController()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

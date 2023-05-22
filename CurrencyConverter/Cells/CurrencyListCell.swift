@@ -31,7 +31,6 @@ class CurrencyListCell: UITableViewCell {
     
     func setLabel(currency: Currency){
         currencyLabel.text = currency.fullCurrensyName
-        
     }
 }
 

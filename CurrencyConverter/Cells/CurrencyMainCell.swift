@@ -33,8 +33,6 @@ class CurrencyMainCell: UITableViewCell {
     func setupStackView() {
         stack = UIStackView(arrangedSubviews: [currencyLabel,currencyTextField])
         stack.axis = .horizontal
-        currencyTextField.borderStyle = .roundedRect
-        currencyTextField.backgroundColor = .secondarySystemBackground
         currencyTextField.setContentHuggingPriority(.init(200), for: .horizontal)
         stack.distribution = .fill
         stack.spacing = 30
@@ -60,7 +58,6 @@ class CurrencyMainCell: UITableViewCell {
         
         if let value = currency.textFieldDoubleValue {
             currencyTextField.text = "\(Double(value))"
-            currencyTextField.blueLayerTF()
             return
         }
         

@@ -77,11 +77,10 @@ class DatePickerView: UIView {
     
     private func configureButtons(){
         okButton.setTitle("OK", for: .normal)
-        okButton.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)
         cancelButton.setTitle("Cancel", for: .normal)
-        cancelButton.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
         let buttons = [okButton,cancelButton]
         buttons.forEach { button in
+            button.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)
             button.layer.borderWidth = 1
             button.layer.cornerRadius = 15
             button.layer.borderColor = UIColor.systemBlue.cgColor

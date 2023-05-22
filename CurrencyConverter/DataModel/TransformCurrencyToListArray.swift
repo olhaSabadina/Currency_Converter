@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TransformCurrency {
+struct TransformCurrencyToListArray {
     var headerArray: [String] = []
     var sectionsArray: [[Currency]] = [[]]
     private let popular = ["UAH","EUR","USD"]

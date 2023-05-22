@@ -13,3 +13,7 @@ enum NetworkRequestError: Error {
     case notValidURL
     case parseError
 }
+
+enum CoreDataError: Error {
+    case noFetchData
+}
