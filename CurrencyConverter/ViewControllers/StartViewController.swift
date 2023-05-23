@@ -22,10 +22,10 @@ class StartViewController: UIViewController {
     private var datePicker: DatePickerView!
     private var currensItemToReSave: Currency?
     
-    var currensyArray: [Currency] = [] {
+    var currenсyArray: [Currency] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.currencyView.addCurrencyButton.isHidden = self.currensyArray.count >= self.numberRowsInMainTable ? true : false
+                self.currencyView.addCurrencyButton.isHidden = self.currenсyArray.count >= self.numberRowsInMainTable ? true : false
             }
             reloadTable()
         }
@@ -80,8 +80,8 @@ class StartViewController: UIViewController {
         let navContrroler = UINavigationController(rootViewController: currencyListVC)
         currencyListVC.completionChooseCurrency = {[weak self] currencyChoose in
             guard let self = self else {return}
-            if self.currensyArray.count < self.numberRowsInMainTable {
-                self.currensyArray.append(currencyChoose)
+            if self.currenсyArray.count < self.numberRowsInMainTable {
+                self.currenсyArray.append(currencyChoose)
                 self.coreData.newCurrencyCore(currencyChoose)
             }
         }
@@ -98,6 +98,7 @@ class StartViewController: UIViewController {
         } else {
             nbuCourse = false
             nationalBankExchangeRateButton.setTitle("National Bank Exchange Rate", for: .normal)
+            fetchDataFromCoreData(Date())
         }
     }
     
@@ -213,7 +214,7 @@ class StartViewController: UIViewController {
         let alert = UIAlertController(title: "Attention\nData not received.", message: "Please check your internet connection", preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "OK", style: .cancel){_ in
             self.lastUpdatedLabel.text = "Not internet\nConnection"
-            self.currensyArray = []
+            self.currenсyArray = []
         }
         alert.addAction(actionOk)
         present(alert, animated: true)
@@ -241,16 +242,16 @@ class StartViewController: UIViewController {
     private func addStoreCurrencystoCurrencyArrayForTable(_ arrayCurrencysFromCoreData:[String]){
         
         guard let fullArrayCurrency = currenciesFromInternet else {return}
-        var mokcurrencysArray = [Currency]()
+        var tempCurrencysArray = [Currency]()
         
         arrayCurrencysFromCoreData.forEach{ item in
             for currency in fullArrayCurrency {
                 if currency.currency == item {
-                    mokcurrencysArray.append(currency)
+                    tempCurrencysArray.append(currency)
                 }
             }
         }
-        currensyArray = mokcurrencysArray
+        currenсyArray = tempCurrencysArray
     }
     
     func reloadTable(){
@@ -281,7 +282,7 @@ extension StartViewController: UITableViewDelegate {
         guard let cellCurrency = (tableView.cellForRow(at: indexPath) as! CurrencyMainCell).currency else {return}
         
         if editingStyle == .delete {
-            currensyArray.remove(at: indexPath.row)
+            currenсyArray.remove(at: indexPath.row)
             coreData.deleteCurrencyCore(currencyToDelete: cellCurrency)
         }
     }
@@ -291,12 +292,12 @@ extension StartViewController: UITableViewDelegate {
 
 extension StartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currensyArray.count
+        return currenсyArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CurrencyMainView.idMainTableViewCell, for: indexPath) as? CurrencyMainCell else {return UITableViewCell()}
-        cell.currency = currensyArray[indexPath.row]
+        cell.currency = currenсyArray[indexPath.row]
         cell.currencyTextField.tag = indexPath.row
         cell.setupLabel(sell: saleCourse, nbu: nbuCourse, valueFromTF: valueTF)
         return cell
@@ -313,12 +314,12 @@ extension StartViewController: UITextFieldDelegate {
               let currensValue = currensItemToReSave
         else {return true}
         
-        currensyArray.indices.forEach { item in
-            currensyArray[item].textFieldDoubleValue = nil
+        currenсyArray.indices.forEach { item in
+            currenсyArray[item].textFieldDoubleValue = nil
         }
         
-        if let i = currensyArray.firstIndex(where: { $0.currency == currensValue.currency}) {
-            currensyArray[i].textFieldDoubleValue = valueTFDouble
+        if let i = currenсyArray.firstIndex(where: { $0.currency == currensValue.currency}) {
+            currenсyArray[i].textFieldDoubleValue = valueTFDouble
         }
         valueTF = textField.tag == 0 ? valueTFDouble : valueTFDouble * (currensValue.saleRateNB ?? 0)
         
@@ -329,6 +330,15 @@ extension StartViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        return updatedText.onlyDigits()
     }
 }
 

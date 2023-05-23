@@ -12,7 +12,7 @@ import UIKit
 extension StartViewController {
     
     func shareText(){
-        let text = createTextToShare(currensyArray)
+        let text = createTextToShare(currenсyArray)
         let obectsToShare = [ text ]
         let activityViewController = UIActivityViewController(activityItems: obectsToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view

@@ -35,6 +35,8 @@
 		588E0B772A084255001599BD /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E0B762A084255001599BD /* UITextField+Extension.swift */; };
 		588E0B792A09274F001599BD /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E0B782A09274F001599BD /* DatePickerView.swift */; };
 		589E53612A0C11F100C3FD47 /* Date+Extensoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589E53602A0C11F100C3FD47 /* Date+Extensoin.swift */; };
+		58A5C5642A1CE06400C8D01D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A5C5632A1CE06400C8D01D /* String+Extension.swift */; };
+		58A5C5662A1D3C1900C8D01D /* PreloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A5C5652A1D3C1900C8D01D /* PreloadData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		588E0B762A084255001599BD /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		588E0B782A09274F001599BD /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		589E53602A0C11F100C3FD47 /* Date+Extensoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensoin.swift"; sourceTree = "<group>"; };
+		58A5C5632A1CE06400C8D01D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		58A5C5652A1D3C1900C8D01D /* PreloadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +236,7 @@
 				588A61F829FFDAE100D36469 /* DataModel.swift */,
 				588A61FC29FFE4B900D36469 /* CurrencyModel.swift */,
 				58306AE92A1411390078BCE4 /* EnumError.swift */,
+				58A5C5652A1D3C1900C8D01D /* PreloadData.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				588E0B762A084255001599BD /* UITextField+Extension.swift */,
 				58306AFD2A14F02A0078BCE4 /* UIView+Extension.swift */,
 				58855C4E2A180E3A00C64411 /* StartViewController+Share+Extension.swift */,
+				58A5C5632A1CE06400C8D01D /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -402,11 +408,13 @@
 				5886124429F6700700B0C35B /* AppDelegate.swift in Sources */,
 				58306AFC2A141B150078BCE4 /* CoreDataManager.swift in Sources */,
 				589E53612A0C11F100C3FD47 /* Date+Extensoin.swift in Sources */,
+				58A5C5642A1CE06400C8D01D /* String+Extension.swift in Sources */,
 				588A61FD29FFE4B900D36469 /* CurrencyModel.swift in Sources */,
 				588A61FF2A013CCB00D36469 /* CurrencesDictionary.swift in Sources */,
 				5886128C29FC570A00B0C35B /* CurrencyMainCell.swift in Sources */,
 				5886124629F6700700B0C35B /* SceneDelegate.swift in Sources */,
 				588A61F929FFDAE100D36469 /* DataModel.swift in Sources */,
+				58A5C5662A1D3C1900C8D01D /* PreloadData.swift in Sources */,
 				588E0B6E2A0300F8001599BD /* TransformCurrencyToListArray.swift in Sources */,
 				58306AF72A141A3E0078BCE4 /* JsonCurrencys+CoreDataClass.swift in Sources */,
 			);
