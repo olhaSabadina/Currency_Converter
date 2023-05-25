@@ -12,7 +12,7 @@ struct NetworkFetchManager {
     
     lazy var coreData = CoreDataManager.instance
     
-    func fetchCurrences(for date: Date, completionhandler: @escaping (Data?, Error?)->(Void)){
+    func fetchCurrences(for date: Date, completionhandler: @escaping (Data?, Error?)->(Void)) {
         guard let url = URL(string: "https://api.privatbank.ua/p24api/exchange_rates?json&date=\(date.formateDateToJsonRequest())") else {
             completionhandler(nil, NetworkRequestError.notValidURL)
             return}
@@ -33,7 +33,7 @@ struct NetworkFetchManager {
         task.resume()
     }
     
-    func parseCurrency(_ jsonData: Data?, completionhandler: @escaping (CurrenciesModel?)->()){
+    func parseCurrency(_ jsonData: Data?, completionhandler: @escaping (CurrenciesModel?)->()) {
         guard let data = jsonData else {
             completionhandler(nil)
             return
@@ -58,7 +58,6 @@ struct NetworkFetchManager {
         }
         return nil
     }
-    
 }
 
 

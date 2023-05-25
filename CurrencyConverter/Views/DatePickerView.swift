@@ -59,7 +59,7 @@ class DatePickerView: UIView {
         view.layer.masksToBounds = false
     }
     
-    func setBlurEffect(){
+    func setBlurEffect() {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.systemUltraThinMaterialLight )
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.bounds
@@ -67,7 +67,7 @@ class DatePickerView: UIView {
         addSubview(blurEffectView)
     }
     
-    private func configureTitleLabel(){
+    private func configureTitleLabel() {
         titleLabel.text = "Select a date to search for the National Bank exchange rate"
         titleLabel.textColor = .systemBlue
         titleLabel.textAlignment = .center
@@ -75,7 +75,7 @@ class DatePickerView: UIView {
         titleLabel.font = UIFont(name: "Regular", size: 12)
     }
     
-    private func configureButtons(){
+    private func configureButtons() {
         okButton.setTitle("OK", for: .normal)
         cancelButton.setTitle("Cancel", for: .normal)
         let buttons = [okButton,cancelButton]
@@ -87,7 +87,7 @@ class DatePickerView: UIView {
         }
     }
     
-    private func configureDatePicker(){
+    private func configureDatePicker() {
         configureMinimumDate()
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.maximumDate = Date()
@@ -96,7 +96,7 @@ class DatePickerView: UIView {
         datePicker.locale = Locale(identifier: "uk")
     }
     
-    func formateDateFromNet() -> String{
+    func formateDateFromNet() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter.string(from: datePicker.date)

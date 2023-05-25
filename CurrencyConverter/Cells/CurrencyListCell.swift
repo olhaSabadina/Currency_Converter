@@ -29,7 +29,7 @@ class CurrencyListCell: UITableViewCell {
         addSubview(currencyLabel)
     }
     
-    func setLabel(currency: Currency){
+    func setLabel(currency: Currency) {
         currencyLabel.text = currency.fullCurrensyName
     }
 }

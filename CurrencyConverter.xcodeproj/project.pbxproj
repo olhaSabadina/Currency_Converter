@@ -11,7 +11,6 @@
 		58306AF72A141A3E0078BCE4 /* JsonCurrencys+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58306AF32A141A3E0078BCE4 /* JsonCurrencys+CoreDataClass.swift */; };
 		58306AF92A141A3E0078BCE4 /* CurrencyCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58306AF52A141A3E0078BCE4 /* CurrencyCore+CoreDataClass.swift */; };
 		58306AFC2A141B150078BCE4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58306AFB2A141B150078BCE4 /* CoreDataManager.swift */; };
-		58306AFE2A14F02A0078BCE4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58306AFD2A14F02A0078BCE4 /* UIView+Extension.swift */; };
 		5836C7F629FF003A00CFA005 /* CurrencyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5836C7F529FF003A00CFA005 /* CurrencyListViewController.swift */; };
 		5836C7F829FF00CA00CFA005 /* CurrencyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5836C7F729FF00CA00CFA005 /* CurrencyListCell.swift */; };
 		58855C4F2A180E3A00C64411 /* StartViewController+Share+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58855C4E2A180E3A00C64411 /* StartViewController+Share+Extension.swift */; };
@@ -61,7 +60,6 @@
 		58306AF32A141A3E0078BCE4 /* JsonCurrencys+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JsonCurrencys+CoreDataClass.swift"; sourceTree = "<group>"; };
 		58306AF52A141A3E0078BCE4 /* CurrencyCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		58306AFB2A141B150078BCE4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		58306AFD2A14F02A0078BCE4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		5836C7F529FF003A00CFA005 /* CurrencyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewController.swift; sourceTree = "<group>"; };
 		5836C7F729FF00CA00CFA005 /* CurrencyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListCell.swift; sourceTree = "<group>"; };
 		58855C4E2A180E3A00C64411 /* StartViewController+Share+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StartViewController+Share+Extension.swift"; sourceTree = "<group>"; };
@@ -146,7 +144,7 @@
 				5886127729F67A8700B0C35B /* ViewControllers */,
 				5886127F29F7F86300B0C35B /* Views */,
 				588A61F629FFDA4800D36469 /* DataModel */,
-				588A61F729FFDA8A00D36469 /* NetworkManager */,
+				588A61F729FFDA8A00D36469 /* Managers */,
 				5886128629FBF07200B0C35B /* Cells */,
 				5886127929F67EB000B0C35B /* CoreData */,
 				5886127829F67ACB00B0C35B /* Resources */,
@@ -206,7 +204,6 @@
 				58306AF32A141A3E0078BCE4 /* JsonCurrencys+CoreDataClass.swift */,
 				58306AF52A141A3E0078BCE4 /* CurrencyCore+CoreDataClass.swift */,
 				5886124C29F6700700B0C35B /* CurrencyConverter.xcdatamodeld */,
-				58306AFB2A141B150078BCE4 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -241,12 +238,13 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
-		588A61F729FFDA8A00D36469 /* NetworkManager */ = {
+		588A61F729FFDA8A00D36469 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				588A61FA29FFDDE800D36469 /* NetworkManager.swift */,
+				58306AFB2A141B150078BCE4 /* CoreDataManager.swift */,
 			);
-			path = NetworkManager;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		588E0B712A08410B001599BD /* Extensions */ = {
@@ -255,7 +253,6 @@
 				588E0B742A0841A5001599BD /* UILabel+Extension.swift */,
 				589E53602A0C11F100C3FD47 /* Date+Extensoin.swift */,
 				588E0B762A084255001599BD /* UITextField+Extension.swift */,
-				58306AFD2A14F02A0078BCE4 /* UIView+Extension.swift */,
 				58855C4E2A180E3A00C64411 /* StartViewController+Share+Extension.swift */,
 				58A5C5632A1CE06400C8D01D /* String+Extension.swift */,
 			);
@@ -392,7 +389,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58306AFE2A14F02A0078BCE4 /* UIView+Extension.swift in Sources */,
 				5836C7F829FF00CA00CFA005 /* CurrencyListCell.swift in Sources */,
 				588E0B792A09274F001599BD /* DatePickerView.swift in Sources */,
 				588E0B752A0841A5001599BD /* UILabel+Extension.swift in Sources */,

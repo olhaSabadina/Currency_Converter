@@ -7,9 +7,9 @@
 
 import UIKit
 
-extension UITextField{
+extension UITextField {
     
-    func addDoneButtonToKeyboard(myAction:Selector?){
+    func addDoneButtonToKeyboard(myAction:Selector?) {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 40))
         doneToolbar.barStyle = UIBarStyle.default
         
@@ -26,14 +26,14 @@ extension UITextField{
         self.inputAccessoryView = doneToolbar
     }
     
-    func blueLayerTF(){
+    func blueLayerTF() {
         self.layer.borderColor = UIColor.blue.cgColor
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
     }
     
-    func notLayerTF(){
+    func notLayerTF() {
         self.layer.borderColor = nil
         self.layer.borderWidth = 0
     }

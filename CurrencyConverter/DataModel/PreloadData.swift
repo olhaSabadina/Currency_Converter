@@ -16,7 +16,7 @@ struct PreloadData {
     let namesCurrency = ["UAH", "USD", "EUR"]
 
     func addDefaultCurrenciesToCoreData(){
-        if userDefaults.bool(forKey: preloadDataKey) == false {
+        if !userDefaults.bool(forKey: preloadDataKey) {
             let backgroundContext = coreDataManager.persistentContainer.newBackgroundContext()
             coreDataManager.persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
             

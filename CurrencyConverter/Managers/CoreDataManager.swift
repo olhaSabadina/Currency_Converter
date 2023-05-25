@@ -52,7 +52,6 @@ class CoreDataManager {
         return array
     }
     
-    
     func newCurrencyCore(_ currency: Currency) {
         
         let newCurrencyCore = CurrencyCore(context: context)
@@ -79,7 +78,7 @@ class CoreDataManager {
         saveContext()
     }
     
-    func deleteCurrencyCore(currencyToDelete: Currency){
+    func deleteCurrencyCore(currencyToDelete: Currency) {
         var currencyCores: [CurrencyCore] = []
         let fetchRequest = NSFetchRequest<CurrencyCore>(entityName: "CurrencyCore")
         do{
@@ -111,7 +110,7 @@ class CoreDataManager {
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

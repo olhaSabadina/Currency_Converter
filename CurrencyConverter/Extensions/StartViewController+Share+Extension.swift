@@ -11,7 +11,7 @@ import UIKit
 
 extension StartViewController {
     
-    func shareText(){
+    func shareText() {
         let text = createTextToShare(currenсyArray)
         let obectsToShare = [ text ]
         let activityViewController = UIActivityViewController(activityItems: obectsToShare, applicationActivities: nil)
@@ -19,13 +19,11 @@ extension StartViewController {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    func shareScreenShotImage(){
-        //Create the UIImage
+    func shareScreenShotImage() {
         UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0)
         guard let context = UIGraphicsGetCurrentContext() else { return }
         view.layer.render(in: context)
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return }
-        UIGraphicsEndImageContext()
         
         let obectsToShare = [ image ]
         let activityViewController = UIActivityViewController(activityItems: obectsToShare, applicationActivities: nil)
@@ -34,8 +32,8 @@ extension StartViewController {
     }
     
     private func createTextToShare(_ array:[Currency]?) -> String {
-        var resultString = ""
         guard let array = array else {return ""}
+        var resultString = ""
         for item in array {
             if item.currency != "UAH" {
                 let str = "100 \(item.currency) = \(String(format: "%.3f", ((item.saleRateNB ?? 0) * 100))) UAH\n"

@@ -11,46 +11,72 @@ class CurrencyListViewController: UIViewController {
     
     static let cellID = "currencyCell"
     
-    var currencyArrayFromNet: [Currency]?
-    var completionChooseCurrency: ((Currency)->())?
-    
-    var tableCurrences = UITableView()
+    var tableCurrencies = UITableView()
     let searchController = UISearchController()
-    var transformCur = TransformCurrencyToListArray()
+    
+    var currencyArrayFromNet: [Currency]?
+    var currencyTransformer = TransformCurrencyToListArray()
     var filteredDataToSections: [Currency] = []
     var arrayCurrencyForTableWithSection: [[Currency]] = []
     var headerTitlesArray: [String]?
     
+    var completionChooseCurrency: ((Currency)->())?
+    
+    //MARK: - live cycle App:
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configView()
+        transformArrayForTableWithSections(model: currencyArrayFromNet)
+    }
+    
+    //MARK: - objc Function:
+    
+    @objc func backToStartViewController() {
+        dismiss(animated: true)
+    }
+    
+    //MARK: -  Transform Function:
+    
+    private func transformArrayForTableWithSections(model: [Currency]?) {
+        guard let models = model else {return}
+        self.currencyTransformer.createDataSourceHeaderAndSectionsArray(model: models)
+        self.headerTitlesArray = self.currencyTransformer.headerArray
+        self.arrayCurrencyForTableWithSection = self.currencyTransformer.sectionsArray
+        DispatchQueue.main.async {
+            self.tableCurrencies.reloadData()
+        }
+    }
+}
+
+//MARK: - Set UIConfiguration:
+
+extension CurrencyListViewController {
+    
+    private func configView() {
         setView()
         setupTable()
         setupLeftBarButton()
         setupSearchController()
-        transformArrayForTableWithSections(model: currencyArrayFromNet)
     }
     
-    @objc func backToStartViewController(){
-        dismiss(animated: true)
-    }
-    
-    func setView() {
+    private func setView() {
         view.backgroundColor = .secondarySystemBackground
         title = "Currencies List"
     }
     
-    func setupTable() {
-        tableCurrences = UITableView(frame: view.bounds, style: .insetGrouped)
-        tableCurrences.delegate = self
-        tableCurrences.dataSource = self
-        view.addSubview(tableCurrences)
-        tableCurrences.register(CurrencyListCell.self, forCellReuseIdentifier: CurrencyListViewController.cellID)
+    private func setupTable() {
+        tableCurrencies = UITableView(frame: view.bounds, style: .insetGrouped)
+        tableCurrencies.delegate = self
+        tableCurrencies.dataSource = self
+        view.addSubview(tableCurrencies)
+        tableCurrencies.register(CurrencyListCell.self, forCellReuseIdentifier: CurrencyListViewController.cellID)
         
-        tableCurrences.backgroundColor = .clear
-        tableCurrences.layer.shadowColor = UIColor.black.cgColor
-        tableCurrences.layer.shadowOffset = .init(width: 0, height: 3)
-        tableCurrences.layer.shadowRadius = 1
-        tableCurrences.layer.shadowOpacity = 0.3
+        tableCurrencies.backgroundColor = .clear
+        tableCurrencies.layer.shadowColor = UIColor.black.cgColor
+        tableCurrencies.layer.shadowOffset = .init(width: 0, height: 3)
+        tableCurrencies.layer.shadowRadius = 1
+        tableCurrencies.layer.shadowOpacity = 0.3
     }
     
     private func setupLeftBarButton() {
@@ -62,22 +88,11 @@ class CurrencyListViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
     
-    func setupSearchController() {
+    private func setupSearchController() {
         navigationItem.searchController = searchController
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.delegate = self
         searchController.searchBar.delegate = self
-    }
-    
-    func transformArrayForTableWithSections(model: [Currency]?) {
-        
-        guard let models = model else {return}
-        self.transformCur.createDataSourceHeaderAndSectionsArray(model: models)
-        self.headerTitlesArray = self.transformCur.headerArray
-        self.arrayCurrencyForTableWithSection = self.transformCur.sectionsArray
-        DispatchQueue.main.async {
-            self.tableCurrences.reloadData()
-        }
     }
 }
 
@@ -85,13 +100,14 @@ class CurrencyListViewController: UIViewController {
 extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var currency: Currency!
+        var currency: Currency?
         if searchController.isActive && searchController.searchBar.text != "" {
             currency = filteredDataToSections[indexPath.row]
             dismiss(animated: false)
         } else {
             currency = arrayCurrencyForTableWithSection[indexPath.section][indexPath.row]
         }
+        guard let currency = currency else {return}
         completionChooseCurrency?(currency)
         backToStartViewController()
     }
@@ -104,7 +120,6 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if searchController.isActive && searchController.searchBar.text != "" {
             return filteredDataToSections.count
         }
@@ -141,6 +156,6 @@ extension CurrencyListViewController: UISearchControllerDelegate, UISearchBarDel
     func filterContentForSearchText(_ searchText: String) {
         guard let currencies = currencyArrayFromNet else {return}
         filteredDataToSections = currencies.filter({$0.fullCurrensyName.lowercased().contains(searchText.lowercased())})
-        tableCurrences.reloadData()
+        tableCurrencies.reloadData()
     }
 }

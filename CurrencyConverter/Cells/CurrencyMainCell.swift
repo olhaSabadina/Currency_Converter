@@ -13,7 +13,6 @@ class CurrencyMainCell: UITableViewCell {
     let currencyLabel = UILabel()
     var stack = UIStackView()
     var currency: Currency?
-    var number: Int?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)

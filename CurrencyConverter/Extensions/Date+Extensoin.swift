@@ -9,13 +9,13 @@ import Foundation
 
 extension Date {
     
-    func formateDateToJsonRequest() -> String{
+    func formateDateToJsonRequest() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter.string(from: self)
     }
     
-    func formateDateToUpdateLabel() -> String{
+    func formateDateToUpdateLabel() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
         return dateFormatter.string(from: self)
