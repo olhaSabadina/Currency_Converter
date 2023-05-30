@@ -22,12 +22,11 @@
 		5886125329F6700A00B0C35B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5886125129F6700A00B0C35B /* LaunchScreen.storyboard */; };
 		5886125E29F6700B00B0C35B /* CurrencyConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5886125D29F6700B00B0C35B /* CurrencyConverterTests.swift */; };
 		5886126829F6700B00B0C35B /* CurrencyConverterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5886126729F6700B00B0C35B /* CurrencyConverterUITests.swift */; };
-		5886126A29F6700B00B0C35B /* CurrencyConverterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5886126929F6700B00B0C35B /* CurrencyConverterUITestsLaunchTests.swift */; };
 		5886128329F7F91600B0C35B /* CurrencyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5886128229F7F91600B0C35B /* CurrencyMainView.swift */; };
 		5886128C29FC570A00B0C35B /* CurrencyMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5886128B29FC570A00B0C35B /* CurrencyMainCell.swift */; };
 		588A61F929FFDAE100D36469 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588A61F829FFDAE100D36469 /* DataModel.swift */; };
 		588A61FB29FFDDE800D36469 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588A61FA29FFDDE800D36469 /* NetworkManager.swift */; };
-		588A61FD29FFE4B900D36469 /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588A61FC29FFE4B900D36469 /* CurrencyModel.swift */; };
+		588A61FD29FFE4B900D36469 /* CurrenciesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588A61FC29FFE4B900D36469 /* CurrenciesModel.swift */; };
 		588A61FF2A013CCB00D36469 /* CurrencesDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588A61FE2A013CCB00D36469 /* CurrencesDictionary.swift */; };
 		588E0B6E2A0300F8001599BD /* TransformCurrencyToListArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E0B6D2A0300F8001599BD /* TransformCurrencyToListArray.swift */; };
 		588E0B752A0841A5001599BD /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E0B742A0841A5001599BD /* UILabel+Extension.swift */; };
@@ -75,12 +74,11 @@
 		5886125D29F6700B00B0C35B /* CurrencyConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterTests.swift; sourceTree = "<group>"; };
 		5886126329F6700B00B0C35B /* CurrencyConverterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrencyConverterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5886126729F6700B00B0C35B /* CurrencyConverterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterUITests.swift; sourceTree = "<group>"; };
-		5886126929F6700B00B0C35B /* CurrencyConverterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5886128229F7F91600B0C35B /* CurrencyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyMainView.swift; sourceTree = "<group>"; };
 		5886128B29FC570A00B0C35B /* CurrencyMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyMainCell.swift; sourceTree = "<group>"; };
 		588A61F829FFDAE100D36469 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		588A61FA29FFDDE800D36469 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		588A61FC29FFE4B900D36469 /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
+		588A61FC29FFE4B900D36469 /* CurrenciesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesModel.swift; sourceTree = "<group>"; };
 		588A61FE2A013CCB00D36469 /* CurrencesDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencesDictionary.swift; sourceTree = "<group>"; };
 		588E0B6D2A0300F8001599BD /* TransformCurrencyToListArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformCurrencyToListArray.swift; sourceTree = "<group>"; };
 		588E0B742A0841A5001599BD /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				5886126729F6700B00B0C35B /* CurrencyConverterUITests.swift */,
-				5886126929F6700B00B0C35B /* CurrencyConverterUITestsLaunchTests.swift */,
 			);
 			path = CurrencyConverterUITests;
 			sourceTree = "<group>";
@@ -231,7 +228,7 @@
 			children = (
 				588E0B6D2A0300F8001599BD /* TransformCurrencyToListArray.swift */,
 				588A61F829FFDAE100D36469 /* DataModel.swift */,
-				588A61FC29FFE4B900D36469 /* CurrencyModel.swift */,
+				588A61FC29FFE4B900D36469 /* CurrenciesModel.swift */,
 				58306AE92A1411390078BCE4 /* EnumError.swift */,
 				58A5C5652A1D3C1900C8D01D /* PreloadData.swift */,
 			);
@@ -405,7 +402,7 @@
 				58306AFC2A141B150078BCE4 /* CoreDataManager.swift in Sources */,
 				589E53612A0C11F100C3FD47 /* Date+Extensoin.swift in Sources */,
 				58A5C5642A1CE06400C8D01D /* String+Extension.swift in Sources */,
-				588A61FD29FFE4B900D36469 /* CurrencyModel.swift in Sources */,
+				588A61FD29FFE4B900D36469 /* CurrenciesModel.swift in Sources */,
 				588A61FF2A013CCB00D36469 /* CurrencesDictionary.swift in Sources */,
 				5886128C29FC570A00B0C35B /* CurrencyMainCell.swift in Sources */,
 				5886124629F6700700B0C35B /* SceneDelegate.swift in Sources */,
@@ -428,7 +425,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5886126A29F6700B00B0C35B /* CurrencyConverterUITestsLaunchTests.swift in Sources */,
 				5886126829F6700B00B0C35B /* CurrencyConverterUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
