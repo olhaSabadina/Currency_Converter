@@ -56,4 +56,26 @@ final class CurrencyConverterUITests: XCTestCase {
         XCTAssert(app.staticTexts["Return to course PB"].exists)
         app.staticTexts["Return to course PB"].tap()
     }
+    
+    func testCurrencyShareText() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["square.and.arrow"].tap()
+        XCTAssert(app/*@START_MENU_TOKEN@*/.scrollViews/*[[".otherElements[\"Choose what you want to share\"].scrollViews",".scrollViews"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.otherElements.buttons["Share text"].exists)
+        app/*@START_MENU_TOKEN@*/.scrollViews/*[[".otherElements[\"Choose what you want to share\"].scrollViews",".scrollViews"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.otherElements.buttons["Share text"].tap()
+        app/*@START_MENU_TOKEN@*/.collectionViews.cells["Messages"]/*[[".otherElements[\"ActivityListView\"].collectionViews",".scrollViews.cells[\"Messages\"]",".cells[\"Messages\"]",".collectionViews"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.otherElements.containing(.staticText, identifier:"Messages").element.tap()
+        XCTAssert(app.buttons["square.and.arrow"].exists)
+    }
+      
+    func testCurrencyShareImage() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["square.and.arrow"].tap()
+        XCTAssert(app/*@START_MENU_TOKEN@*/.scrollViews/*[[".otherElements[\"Choose what you want to share\"].scrollViews",".scrollViews"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.otherElements.buttons["Share image"].exists)
+        app/*@START_MENU_TOKEN@*/.scrollViews/*[[".otherElements[\"Choose what you want to share\"].scrollViews",".scrollViews"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.otherElements.buttons["Share image"].tap()
+        app/*@START_MENU_TOKEN@*/.collectionViews.containing(.button, identifier:"Copy").element/*[[".otherElements[\"ActivityListView\"]",".collectionViews.containing(.button, identifier:\"XCElementSnapshotPrivilegedValuePlaceholder\").element",".collectionViews.containing(.button, identifier:\"Print\").element",".collectionViews.containing(.button, identifier:\"Assign to Contact\").element",".collectionViews.containing(.button, identifier:\"Copy\").element"],[[[-1,4],[-1,3],[-1,2],[-1,1],[-1,0,1]],[[-1,4],[-1,3],[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        XCTAssert(app.buttons["square.and.arrow"].exists)
+        
+    }
+    
 }

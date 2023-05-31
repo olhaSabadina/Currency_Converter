@@ -21,7 +21,7 @@ enum BaseCurrency: String, Codable {
 
 // MARK: - ExchangeRate
 struct Currency: Codable {
-    let baseCurrency: BaseCurrency
+    var baseCurrency: BaseCurrency? = nil
     let currency: String
     let saleRateNB: Double?
     let purchaseRateNB: Double?
