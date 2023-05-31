@@ -11,9 +11,26 @@ import CoreData
 class CoreDataManager {
     
     static let instance = CoreDataManager()
-    private init(){}
     
-    lazy var context = persistentContainer.viewContext
+    let context: NSManagedObjectContext
+    
+    var persistentContainer = {
+        let container = NSPersistentContainer(name: "CurrencyConverter")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    private init() {
+        self.context = self.persistentContainer.viewContext
+    }
+    
+    init(_ mainContext: NSManagedObjectContext) {
+        self.context = mainContext
+    }
     
     func getJsonCurrencysForDate(date: Date) -> JsonCurrencys? {
         var jsonCurrencys: [JsonCurrencys] = []
@@ -53,16 +70,13 @@ class CoreDataManager {
     }
     
     func newCurrencyCore(_ currency: Currency) {
-        
         let newCurrencyCore = CurrencyCore(context: context)
-        
         newCurrencyCore.currencyName = currency.currency
         newCurrencyCore.idTime = Date()
         saveContext()
     }
     
     func newCurrencyCoreFromString(_ currencyName: String) {
-        
         let newCurrencyCore = CurrencyCore(context: context)
         newCurrencyCore.currencyName = currencyName
         newCurrencyCore.idTime = Date()
@@ -70,7 +84,6 @@ class CoreDataManager {
     }
     
     func newjsonCurrencys(jsonCurrencyData: Data?, date: Date) {
-        
         let newjsonCurrencys = JsonCurrencys(context: context)
         guard let dataJson = jsonCurrencyData else {return}
         newjsonCurrencys.dateFetch = date
@@ -94,24 +107,9 @@ class CoreDataManager {
         }
     }
     
-    
-    // MARK: - Core Data stack
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-        
-        let container = NSPersistentContainer(name: "CurrencyConverter")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-    
     // MARK: - Core Data Saving support
     
     func saveContext() {
-//        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
