@@ -214,10 +214,9 @@ extension StartViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let cellCurrency = (tableView.cellForRow(at: indexPath) as! CurrencyMainCell).currency else {return}
         if editingStyle == .delete {
             currenсyArray.remove(at: indexPath.row)
-            coreData.deleteCurrencyCore(currencyToDelete: cellCurrency)
+            coreData.deleteCurrencyCore(indexPath.row)
         }
     }
 }
