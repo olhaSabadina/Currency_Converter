@@ -12,24 +12,25 @@ class CoreDataManager {
     
     static let instance = CoreDataManager()
     
-    let context: NSManagedObjectContext
+    let persistentContainer: NSPersistentContainer
+    lazy var context = persistentContainer.viewContext
     
-    var persistentContainer = {
-        let container = NSPersistentContainer(name: "CurrencyConverter")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+    private init() {
+        persistentContainer = NSPersistentContainer(name: "CurrencyConverter")
+        persistentContainer.loadPersistentStores{ (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        })
-        return container
-    }()
-    
-    private init() {
-        self.context = self.persistentContainer.viewContext
+        }
     }
-    
-    init(_ mainContext: NSManagedObjectContext) {
-        self.context = mainContext
+    init(_ test: String? = nil) {
+        persistentContainer = NSPersistentContainer(name: "CurrencyConverter")
+        persistentContainer.persistentStoreDescriptions.first?.type = NSInMemoryStoreType
+        persistentContainer.loadPersistentStores { description, error in
+            guard error == nil else {
+                fatalError("was unable to load store \(error!)")
+            }
+        }
     }
     
     func getJsonCurrencysForDate(date: Date) -> JsonCurrencys? {

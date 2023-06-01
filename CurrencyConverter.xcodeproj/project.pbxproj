@@ -33,7 +33,6 @@
 		588E0B772A084255001599BD /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E0B762A084255001599BD /* UITextField+Extension.swift */; };
 		588E0B792A09274F001599BD /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588E0B782A09274F001599BD /* DatePickerView.swift */; };
 		589E53612A0C11F100C3FD47 /* Date+Extensoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589E53602A0C11F100C3FD47 /* Date+Extensoin.swift */; };
-		58A3067D2A274D97003BF4A9 /* CoreDataTextStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A3067C2A274D97003BF4A9 /* CoreDataTextStack.swift */; };
 		58A3067F2A2758BB003BF4A9 /* CurrencyNetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A3067E2A2758BB003BF4A9 /* CurrencyNetworkTest.swift */; };
 		58A5C5642A1CE06400C8D01D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A5C5632A1CE06400C8D01D /* String+Extension.swift */; };
 		58A5C5662A1D3C1900C8D01D /* PreloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A5C5652A1D3C1900C8D01D /* PreloadData.swift */; };
@@ -87,7 +86,6 @@
 		588E0B762A084255001599BD /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		588E0B782A09274F001599BD /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		589E53602A0C11F100C3FD47 /* Date+Extensoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensoin.swift"; sourceTree = "<group>"; };
-		58A3067C2A274D97003BF4A9 /* CoreDataTextStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTextStack.swift; sourceTree = "<group>"; };
 		58A3067E2A2758BB003BF4A9 /* CurrencyNetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyNetworkTest.swift; sourceTree = "<group>"; };
 		58A5C5632A1CE06400C8D01D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		58A5C5652A1D3C1900C8D01D /* PreloadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadData.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				5886125D29F6700B00B0C35B /* CoreDataCurrencyConverterTests.swift */,
-				58A3067C2A274D97003BF4A9 /* CoreDataTextStack.swift */,
 				58A3067E2A2758BB003BF4A9 /* CurrencyNetworkTest.swift */,
 			);
 			path = CurrencyConverterTests;
@@ -423,7 +420,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58A3067D2A274D97003BF4A9 /* CoreDataTextStack.swift in Sources */,
 				5886125E29F6700B00B0C35B /* CoreDataCurrencyConverterTests.swift in Sources */,
 				58A3067F2A2758BB003BF4A9 /* CurrencyNetworkTest.swift in Sources */,
 			);
