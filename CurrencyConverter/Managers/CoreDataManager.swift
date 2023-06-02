@@ -11,9 +11,27 @@ import CoreData
 class CoreDataManager {
     
     static let instance = CoreDataManager()
-    private init(){}
     
+    let persistentContainer: NSPersistentContainer
     lazy var context = persistentContainer.viewContext
+    
+    private init() {
+        persistentContainer = NSPersistentContainer(name: "CurrencyConverter")
+        persistentContainer.loadPersistentStores{ (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+    }
+    init(_ test: String? = nil) {
+        persistentContainer = NSPersistentContainer(name: "CurrencyConverter")
+        persistentContainer.persistentStoreDescriptions.first?.type = NSInMemoryStoreType
+        persistentContainer.loadPersistentStores { description, error in
+            guard error == nil else {
+                fatalError("was unable to load store \(error!)")
+            }
+        }
+    }
     
     func getJsonCurrencysForDate(date: Date) -> JsonCurrencys? {
         var jsonCurrencys: [JsonCurrencys] = []
@@ -53,16 +71,13 @@ class CoreDataManager {
     }
     
     func newCurrencyCore(_ currency: Currency) {
-        
         let newCurrencyCore = CurrencyCore(context: context)
-        
         newCurrencyCore.currencyName = currency.currency
         newCurrencyCore.idTime = Date()
         saveContext()
     }
     
     func newCurrencyCoreFromString(_ currencyName: String) {
-        
         let newCurrencyCore = CurrencyCore(context: context)
         newCurrencyCore.currencyName = currencyName
         newCurrencyCore.idTime = Date()
@@ -70,7 +85,6 @@ class CoreDataManager {
     }
     
     func newjsonCurrencys(jsonCurrencyData: Data?, date: Date) {
-        
         let newjsonCurrencys = JsonCurrencys(context: context)
         guard let dataJson = jsonCurrencyData else {return}
         newjsonCurrencys.dateFetch = date
@@ -78,40 +92,22 @@ class CoreDataManager {
         saveContext()
     }
     
-    func deleteCurrencyCore(currencyToDelete: Currency) {
-        var currencyCores: [CurrencyCore] = []
+    func deleteCurrencyCore(_ indexDelete: Int) {
         let fetchRequest = NSFetchRequest<CurrencyCore>(entityName: "CurrencyCore")
+        let sortDescriptorToIdTime = NSSortDescriptor(key: #keyPath(CurrencyCore.idTime), ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptorToIdTime]
         do{
-            currencyCores = try context.fetch(fetchRequest)
+            let currencyCores = try context.fetch(fetchRequest)
+            context.delete(currencyCores[indexDelete])
+            saveContext()
         } catch {
             print(CoreDataError.noFetchData)
         }
-        for item in currencyCores {
-            if item.currencyName == currencyToDelete.currency {
-                context.delete(item)
-                saveContext()
-            }
-        }
     }
-    
-    
-    // MARK: - Core Data stack
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-        
-        let container = NSPersistentContainer(name: "CurrencyConverter")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
     
     // MARK: - Core Data Saving support
     
     func saveContext() {
-        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
