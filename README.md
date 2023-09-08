@@ -1,7 +1,5 @@
 # Image Search App
-A program for searching and viewing pictures from the network and your own photo gallery 
-with the possibility of cropping them and saving the processed files to 
-a crop folder in the gallery.
+Application for quick assessment of the current exchange rate.
 
 ## Content
 - [Technologies](#technologies)
@@ -17,28 +15,21 @@ a crop folder in the gallery.
 - WebKit
 - MVC
 - Without storyboard
-- JSON
-- SPM TOCropViewController
-- Fork (Customize TOCropViewController)
-- CollectionViews
+- URLSession
+- Codable
+- Repository pattern
+- UNIT/UI Tests
 
 ## Additionally
-As an addition, a crop was customized to save the visual continuation of the project 
-with the ability to select a new image from any of the application screens. 
-Saving the processed files to a crop folder in the gallery.
-(as in the screenshot below)
-
-<img src="./Screenshot/8.png" alt="drawing" width="200"/> <img src="./Screenshot/9.png" alt="drawing" width="200"/> <img src="./Screenshot/10.png" alt="drawing" width="200"/>
-
-It is also possible to view the selected image in the maximum resolution.(as in the screenshot below)
-
- <img src="./Screenshot/7.png" alt="drawing" width="600"/>
+Buy/sell rate relative to 2-3 major foreign currencies in the country. First – country currency.
+If the course was updated during the specified time period, the application works offline (used CoreData).
+Ability to share the exchange rate of selected currency to country currency in messengers.
 
 ## Screenshots:
 
-<img src="./Screenshot/2.png" alt="drawing" width="200"/> <img src="./Screenshot/3.png" alt="drawing" width="200"/>  
+<img src="./Screenshot/1.png" alt="drawing" width="200"/> <img src="./Screenshot/2.png" alt="drawing" width="200"/>  <img src="./Screenshot/3.png" alt="drawing" width="200"/> 
 
-<img src="./Screenshot/4.png" alt="drawing" width="200"/> <img src="./Screenshot/6.png" alt="drawing" width="200"/> 
+<img src="./Screenshot/4.png" alt="drawing" width="200"/> <img src="./Screenshot/5.png" alt="drawing" width="200"/> <img src="./Screenshot/6.png" alt="drawing" width="200"/>
 
 ## Contributing
 If you find a bug or remark in the code or when the program is running, please email me:
